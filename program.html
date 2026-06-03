@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program - Zenith Zirve</title>
+    <meta name="description" content="Zenith Zirve 2026 programını inceleyin. Üç günlük etkinlik akışı.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigasyon -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">Zenith Zirve</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                <li><a href="ekibimiz.html">Ekibimiz</a></li>
+                <li><a href="program.html" class="active">Program</a></li>
+                <li><a href="konusmacilarimiz.html">Konuşmacılarımız</a></li>
+                <li><a href="basvuru.html" class="btn-nav">Başvuru</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Etkinlik Programı</h1>
+            <p>27-28 Haziran 2026 tarihlerinde gerçekleşecek iki günlük zirve programı</p>
+        </div>
+    </section>
+
+    <!-- Program Tabs -->
+    <section class="section">
+        <div class="container">
+            <div class="program-tabs">
+                <button class="tab-btn active" data-day="1">27 Haziran</button>
+                <button class="tab-btn" data-day="2">28 Haziran</button>
+            </div>
+
+            <!-- 1. Gün -->
+            <div class="program-day active" id="day-1">
+                <div class="day-header">
+                    <h2>27 Haziran 2026</h2>
+                    <p>Açılış ve Konuşmacılar</p>
+                </div>
+                <div class="program-timeline">
+                    <div class="program-item">
+                        <div class="program-time">09.00 – 10.00</div>
+                        <div class="program-content">
+                            <h3>Kayıt / Kahvaltı</h3>
+                            <p>Katılımcı kayıtları ve kahvaltı (1 saat)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">10.00 – 10.30</div>
+                        <div class="program-content">
+                            <h3>Açılış Konferansı</h3>
+                            <p>Etkinlik açılış konuşması (30 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">10.30 – 11.20</div>
+                        <div class="program-content">
+                            <h3>1. Konuşmacı</h3>
+                            <p>Konuşmacı sunumu (50 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">11.20 – 11.50</div>
+                        <div class="program-content">
+                            <h3>Ara</h3>
+                            <p>Mola (30 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">11.50 – 12.40</div>
+                        <div class="program-content">
+                            <h3>2. Konuşmacı</h3>
+                            <p>Konuşmacı sunumu (50 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">12.40 – 13.40</div>
+                        <div class="program-content">
+                            <h3>Öğle Arası</h3>
+                            <p>Yemek molası (1 saat)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">13.40 – 14.30</div>
+                        <div class="program-content">
+                            <h3>3. Konuşmacı</h3>
+                            <p>Konuşmacı sunumu (50 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">14.30 – 15.00</div>
+                        <div class="program-content">
+                            <h3>Ara</h3>
+                            <p>Mola (30 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">15.00 – 16.00</div>
+                        <div class="program-content">
+                            <h3>Workshop</h3>
+                            <p>Atölye çalışması (1 saat)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">16.00 – 16.30</div>
+                        <div class="program-content">
+                            <h3>Ara</h3>
+                            <p>Mola (30 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">16.30 – 17.20</div>
+                        <div class="program-content">
+                            <h3>4. Konuşmacı</h3>
+                            <p>Konuşmacı sunumu (50 dk)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Gün -->
+            <div class="program-day" id="day-2">
+                <div class="day-header">
+                    <h2>28 Haziran 2026</h2>
+                    <p>Konuşmacılar ve Kapanış</p>
+                </div>
+                <div class="program-timeline">
+                    <div class="program-item">
+                        <div class="program-time">09.00 – 09.40</div>
+                        <div class="program-content">
+                            <h3>Kahvaltı</h3>
+                            <p>Güne başlangıç kahvaltısı (40 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">09.40 – 10.30</div>
+                        <div class="program-content">
+                            <h3>5. Konuşmacı</h3>
+                            <p>Konuşmacı sunumu (50 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">10.30 – 11.00</div>
+                        <div class="program-content">
+                            <h3>Ara</h3>
+                            <p>Mola (30 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">11.00 – 11.50</div>
+                        <div class="program-content">
+                            <h3>6. Konuşmacı</h3>
+                            <p>Konuşmacı sunumu (50 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">11.50 – 12.20</div>
+                        <div class="program-content">
+                            <h3>Ara</h3>
+                            <p>Mola (30 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">12.20 – 13.10</div>
+                        <div class="program-content">
+                            <h3>7. Konuşmacı</h3>
+                            <p>Konuşmacı sunumu (50 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">13.10 – 15.00</div>
+                        <div class="program-content">
+                            <h3>Öğle Arası</h3>
+                            <p>Yemek molası (1 saat 50 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">15.00 – 15.50</div>
+                        <div class="program-content">
+                            <h3>8. Konuşmacı</h3>
+                            <p>Konuşmacı sunumu (50 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">15.50 – 16.20</div>
+                        <div class="program-content">
+                            <h3>Ara</h3>
+                            <p>Mola (30 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">16.20 – 17.10</div>
+                        <div class="program-content">
+                            <h3>9. Konuşmacı</h3>
+                            <p>Konuşmacı sunumu (50 dk)</p>
+                        </div>
+                    </div>
+                    <div class="program-item">
+                        <div class="program-time">17.10 – 18.10</div>
+                        <div class="program-content">
+                            <h3>Kapanış Konferansı</h3>
+                            <p>Etkinlik kapanış konuşması (1 saat)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Programa Katıl</h2>
+            <p>Zenith Zirve 2026 programına katılmak için hemen başvurun</p>
+            <a href="basvuru.html" class="btn btn-primary btn-large">Hemen Başvur</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Zenith Zirve</h3>
+                    <p>Türkiye'nin dört bir yanından gençleri bir araya getirerek fikir üreten, tartışan ve geleceği şekillendiren bir ulusal gençlik platformuyuz.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                        <li><a href="ekibimiz.html">Ekibimiz</a></li>
+                        <li><a href="program.html">Program</a></li>
+                        <li><a href="konusmacilarimiz.html">Konuşmacılarımız</a></li>
+                        <li><a href="basvuru.html">Başvuru</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>İletişim</h3>
+                    <ul>
+                        <li>📧 info@zenithzirve.com</li>
+                        <li>📍 İstanbul, Türkiye</li>
+                        <li>📱 +90 555 123 4567</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Etkinlik Bilgileri</h3>
+                    <ul>
+                        <li>📅 27-28 Haziran 2026</li>
+                        <li>📍 TÜGVA Genel Merkez</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Zenith Zirve. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekibimiz - Zenith Zirve</title>
+    <meta name="description" content="Zenith Zirve ekibini tanıyın. Genç ve dinamik ekibimizle tanışın.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigasyon -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">Zenith Zirve</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                <li><a href="ekibimiz.html" class="active">Ekibimiz</a></li>
+                <li><a href="program.html">Program</a></li>
+                <li><a href="konusmacilarimiz.html">Konuşmacılarımız</a></li>
+                <li><a href="basvuru.html" class="btn-nav">Başvuru</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Departmanlar -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Ekibimiz</h2>
+                <p>Zenith Zirve'yi hayata geçiren genç ve dinamik ekibimizle tanışın</p>
+            </div>
+
+            <!-- Genel Koordinatörler -->
+            <div class="department-section">
+                <h3>Genel Koordinatörler</h3>
+                <div class="team-grid">
+                    <div class="team-card" onclick="showMessage('yigit')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Yiğit Efe Sevir</h4>
+                        <p class="team-role">Genel Koordinatör</p>
+                    </div>
+                    <div class="team-card" onclick="showMessage('ada')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Ada Nehir Şahin</h4>
+                        <p class="team-role">Genel Koordinatör</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Genel Danışmanlar -->
+            <div class="department-section">
+                <h3>Genel Danışmanlar</h3>
+                <div class="team-grid">
+                    <div class="team-card" onclick="showMessage('muhammed')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Muhammed Ömer Bozkuş</h4>
+                        <p class="team-role">Genel Danışman</p>
+                    </div>
+                    <div class="team-card" onclick="showMessage('hanife')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Hanife Ezgi Gören</h4>
+                        <p class="team-role">Genel Danışman</p>
+                    </div>
+                    <div class="team-card" onclick="showMessage('emir')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Emir Kızıltuğ</h4>
+                        <p class="team-role">Genel Danışman</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Halkla İlişkiler -->
+            <div class="department-section">
+                <h3>Halkla İlişkiler</h3>
+                <div class="team-grid">
+                    <div class="team-card" onclick="showMessage('elif')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Elif Kaplan</h4>
+                        <p class="team-role">Halkla İlişkiler Başkanı</p>
+                    </div>
+                    <div class="team-card" onclick="showMessage('cemre')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Cemre Seçkin</h4>
+                        <p class="team-role">Halkla İlişkiler Başkanı</p>
+                    </div>
+                    <div class="team-card" onclick="showMessage('asli')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Aslı Subaşı</h4>
+                        <p class="team-role">Halkla İlişkiler Başkanı</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Saha ve Güvenlik -->
+            <div class="department-section">
+                <h3>Saha ve Güvenlik</h3>
+                <div class="team-grid">
+                    <div class="team-card" onclick="showMessage('abdulkadir')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Abdulkadir Özyapıcı</h4>
+                        <p class="team-role">Saha ve Güvenlik Başkanı</p>
+                    </div>
+                    <div class="team-card" onclick="showMessage('deniz')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Deniz Elma</h4>
+                        <p class="team-role">Saha ve Güvenlik Başkanı</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kreatif -->
+            <div class="department-section">
+                <h3>Kreatif</h3>
+                <div class="team-grid">
+                    <div class="team-card" onclick="showMessage('ebrar')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Ebrar Aygün</h4>
+                        <p class="team-role">Kreatif Başkanı</p>
+                    </div>
+                    <div class="team-card" onclick="showMessage('akif')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Akif Efe Altunsoy</h4>
+                        <p class="team-role">Kreatif Başkanı</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Basın -->
+            <div class="department-section">
+                <h3>Basın</h3>
+                <div class="team-grid">
+                    <div class="team-card" onclick="showMessage('nihal')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Nihal Bayrak</h4>
+                        <p class="team-role">Basın Başkanı</p>
+                    </div>
+                    <div class="team-card" onclick="showMessage('omer')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Ömer Kamil Okutan</h4>
+                        <p class="team-role">Basın Başkanı</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Finans -->
+            <div class="department-section">
+                <h3>Finans</h3>
+                <div class="team-grid">
+                    <div class="team-card" onclick="showMessage('meyra')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Meyra Paçali</h4>
+                        <p class="team-role">Finans Başkanı</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İnsan Kaynakları -->
+            <div class="department-section">
+                <h3>İnsan Kaynakları</h3>
+                <div class="team-grid">
+                    <div class="team-card" onclick="showMessage('omur')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Ömür Aydın</h4>
+                        <p class="team-role">İnsan Kaynakları Başkanı</p>
+                    </div>
+                    <div class="team-card" onclick="showMessage('eylul')">
+                        <div class="team-avatar">
+                            <span>👤</span>
+                        </div>
+                        <h4>Eylül Şahin</h4>
+                        <p class="team-role">İnsan Kaynakları Başkanı</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ekibimize Katılın</h2>
+            <p>Zenith Zirve ekibinin bir parçası olmak için iletişime geçin</p>
+            <a href="mailto:info@zenithzirve.com" class="btn btn-primary btn-large">İletişime Geç</a>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalName"></h2>
+            <p id="modalRole"></p>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Zenith Zirve</h3>
+                    <p>Türkiye'nin dört bir yanından gençleri bir araya getirerek fikir üreten, tartışan ve geleceği şekillendiren bir ulusal gençlik platformuyuz.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                        <li><a href="ekibimiz.html">Ekibimiz</a></li>
+                        <li><a href="program.html">Program</a></li>
+                        <li><a href="konusmacilarimiz.html">Konuşmacılarımız</a></li>
+                        <li><a href="basvuru.html">Başvuru</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>İletişim</h3>
+                    <ul>
+                        <li>📧 info@zenithzirve.com</li>
+                        <li>📍 İstanbul, Türkiye</li>
+                        <li>📱 +90 555 123 4567</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Etkinlik Bilgileri</h3>
+                    <ul>
+                        <li>📅 27-28 Haziran 2026</li>
+                        <li>📍 TÜGVA Genel Merkez</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Zenith Zirve. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

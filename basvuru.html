@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Başvuru - Zenith Zirve</title>
+    <meta name="description" content="Zenith Zirve 2026'ya başvurun. Türkiye'nin en büyük zirve etkinliğine katılın.">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigasyon -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="index.html">Zenith Zirve</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Ana Sayfa</a></li>
+                <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                <li><a href="ekibimiz.html">Ekibimiz</a></li>
+                <li><a href="program.html">Program</a></li>
+                <li><a href="konusmacilarimiz.html">Konuşmacılarımız</a></li>
+                <li><a href="basvuru.html" class="btn-nav">Başvuru</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Başvuru Formu</h1>
+            <p>Zenith Zirve 2026'ya başvurmak için formu doldurun</p>
+        </div>
+    </section>
+
+    <!-- Başvuru Formu -->
+    <section class="section">
+        <div class="container">
+            <div class="form-container">
+                <form id="applicationForm">
+                    <!-- Kişisel Bilgiler -->
+                    <div class="form-section">
+                        <h2>Kişisel Bilgiler</h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="firstName">Ad *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Soyad *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-posta *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Telefon *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="birthDate">Doğum Tarihi *</label>
+                                <input type="date" id="birthDate" name="birthDate" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">Şehir *</label>
+                                <input type="text" id="city" name="city" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Eğitim Bilgileri -->
+                    <div class="form-section">
+                        <h2>Eğitim Bilgileri</h2>
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="school">Okul *</label>
+                                <input type="text" id="school" name="school" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="grade">Sınıf *</label>
+                                <select id="grade" name="grade" required>
+                                    <option value="">Seçiniz</option>
+                                    <option value="9">9. Sınıf</option>
+                                    <option value="10">10. Sınıf</option>
+                                    <option value="11">11. Sınıf</option>
+                                    <option value="12">12. Sınıf</option>
+                                    <option value="university">Üniversite</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label for="department">Bölüm / Alan</label>
+                                <input type="text" id="department" name="department">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Deneyim ve Motivasyon -->
+                    <div class="form-section">
+                        <h2>Deneyim ve Motivasyon</h2>
+                        <div class="form-group full-width">
+                            <label for="experience">Daha önce katıldığınız benzer etkinlikler var mı?</label>
+                            <textarea id="experience" name="experience" rows="3"></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="motivation">Neden Zenith Zirve'ye katılmak istiyorsunuz? *</label>
+                            <textarea id="motivation" name="motivation" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="expectations">Etkinlikten beklentileriniz nelerdir?</label>
+                            <textarea id="expectations" name="expectations" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Ek Bilgiler -->
+                    <div class="form-section">
+                        <h2>Ek Bilgiler</h2>
+                        <div class="form-group">
+                            <label for="howDidYouHear">Bizi nasıl duydunuz?</label>
+                            <select id="howDidYouHear" name="howDidYouHear">
+                                <option value="">Seçiniz</option>
+                                <option value="socialMedia">Sosyal Medya</option>
+                                <option value="friend">Arkadaş/Akraba</option>
+                                <option value="school">Okul</option>
+                                <option value="website">Web Sitesi</option>
+                                <option value="other">Diğer</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" name="newsletter" id="newsletter">
+                                Haber bülteni almak istiyorum
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" name="agreement" id="agreement" required>
+                                <a href="#" style="color: var(--primary-color);">Kullanım şartlarını</a> ve <a href="#" style="color: var(--primary-color);">gizlilik politikasını</a> okudum ve kabul ediyorum *
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-primary btn-large">Başvuruyu Gönder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Zenith Zirve</h3>
+                    <p>Türkiye'nin dört bir yanından gençleri bir araya getirerek fikir üreten, tartışan ve geleceği şekillendiren bir ulusal gençlik platformuyuz.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Hızlı Linkler</h3>
+                    <ul>
+                        <li><a href="index.html">Ana Sayfa</a></li>
+                        <li><a href="hakkimizda.html">Hakkımızda</a></li>
+                        <li><a href="ekibimiz.html">Ekibimiz</a></li>
+                        <li><a href="program.html">Program</a></li>
+                        <li><a href="konusmacilarimiz.html">Konuşmacılarımız</a></li>
+                        <li><a href="basvuru.html">Başvuru</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>İletişim</h3>
+                    <ul>
+                        <li>📧 zenithzirve@gmail.com/li>
+                        <li>📍 İstanbul, Türkiye</li>
+                        <li>📱 +90 546 926 2010 - Yiğit Efe Sevir</li>
+                        <li>📱 +90 501 012 5860 - Ada Nehir Şahin</li>  
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Etkinlik Bilgileri</h3>
+                    <ul>
+                        <li>📅 27-28 Haziran 2026</li>
+                        <li>📍 TÜGVA Genel Merkez</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Zenith Zirve. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
