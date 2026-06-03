@@ -1001,6 +1001,14 @@ body {
     box-shadow: 0 4px 16px rgba(30, 58, 138, 0.15);
 }
 
+.speaker-photo[src*="emircanturan"] {
+    object-position: center 30%;
+}
+
+.speaker-photo[src*="halenurkutuk"] {
+    object-position: center 30%;
+}
+
 .speaker-card h3 {
     color: var(--foreground);
     font-size: 1.3rem;
