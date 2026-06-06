@@ -268,12 +268,12 @@ const teamMessages = {
     omur: {
         name: 'Ömür Aydın',
         role: 'İnsan Kaynakları Başkanı',
-        message: 'Değerli Ekibim,\n\nİnsan Kaynakları olarak ekibimizin gelişimi için çalışıyoruz. Birlikte başaracağız.'
+        message: 'Değerli Katılımcılar,\n\nZENITH Zirve 2026\'nın hayata geçirilmesinde en büyük gücümüz; ortak bir hedef doğrultusunda çalışan, sorumluluk alan ve üretmekten vazgeçmeyen ekip arkadaşlarımızdır. İnsan Kaynakları Birimi olarak bizler, bu büyük organizasyonun arkasındaki insan kaynağını güçlendirmeyi ve ekip ruhunu canlı tutmayı temel sorumluluğumuz olarak görüyoruz.\n\nAylar süren hazırlık süreci boyunca farklı görev ve sorumluluklara sahip ekip üyelerimizin uyum içerisinde çalışabilmesi, kendilerini geliştirebilmesi ve organizasyonun bir parçası olduğunu hissedebilmesi için büyük bir özveriyle çalıştık. Çünkü inanıyoruz ki güçlü organizasyonlar, güçlü ekiplerin eseridir.\n\nZENITH\'in yalnızca katılımcılar için değil, organizasyon ekibinde yer alan her gönüllü için de öğretici ve ilham verici bir deneyime dönüşmesini temenni ediyoruz. Birlikte üretmenin ve ortak bir amaç etrafında buluşmanın değerini hissettiğimiz bu yolculuğun hepimiz için unutulmaz olacağına inanıyoruz.\n\nBu vesileyle ZENITH Zirve 2026\'ya katkı sunan tüm ekip arkadaşlarımıza ve katılımcılarımıza teşekkür ediyor, programımızın başarılı geçmesini diliyorum.\n\nSaygılarımla,\n\nÖmür Aydın\nZENITH Zirve 2026\nİnsan Kaynakları Başkanı'
     },
     eylul: {
         name: 'Eylül Şahin',
         role: 'İnsan Kaynakları Başkanı',
-        message: 'Sevgili Ekibim,\n\nEkibimizin mutluluğu ve gelişimi için elimden geleni yapacağım. Yanınızdayım.'
+        message: 'Değerli Katılımcılar,\n\nHer başarılı organizasyonun temelinde, aynı hedefe inanan ve birlikte hareket eden insanlar bulunmaktadır. ZENITH Zirve 2026 da farklı yeteneklere, deneyimlere ve bakış açılarına sahip birçok kişinin ortak emeğiyle ortaya çıkmış değerli bir çalışmadır.\n\nİnsan Kaynakları Birimi olarak önceliğimiz; ekip üyelerimizin kendilerini geliştirebildiği, fikirlerini özgürce paylaşabildiği ve aidiyet duygusunu hissedebildiği bir çalışma ortamı oluşturmaktı. Çünkü bir organizasyonun gerçek başarısının, arkasındaki insanların uyumu ve motivasyonuyla mümkün olduğuna inanıyoruz.\n\nZENITH\'in gençlerin gelişimine katkı sunan bir platform olmasının yanı sıra, ekip ruhunu ve birlikte üretme kültürünü de güçlendiren bir deneyim olmasını diliyoruz. Bu süreçte kurulan dostlukların, kazanılan tecrübelerin ve ortaya konulan emeklerin uzun yıllar boyunca değerini koruyacağına inanıyoruz.\n\nZENITH Zirve 2026\'nın hepimiz için ilham verici ve unutulmaz bir deneyime dönüşmesini temenni ediyor, katılımınız için teşekkür ediyorum.\n\nSaygılarımla,\n\nEylül Şahin\nZENITH Zirve 2026\nİnsan Kaynakları Başkanı'
     }
 };
 
