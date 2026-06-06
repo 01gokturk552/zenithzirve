@@ -243,12 +243,12 @@ const teamMessages = {
     ebrar: {
         name: 'Ebrar Aygün',
         role: 'Kreatif Başkanı',
-        message: 'Sevgili Ekibim,\n\nYaratıcı fikirlerimizle zirveyi özel kılacağız. Birlikte çalışarak harika işler çıkaracağız.'
+        message: 'Değerli Katılımcılar,\n\nHer organizasyonun bir hikâyesi, her hikâyenin ise kendine özgü bir kimliği vardır. ZENITH Zirve 2026\'nın hazırlık sürecinde bizler Kreatif Birim olarak, bu kimliği en doğru şekilde oluşturmak ve sizlere yansıtmak için büyük bir heyecanla çalıştık.\n\nAmacımız yalnızca görsel çalışmalar üretmek değil; ZENITH\'in vizyonunu, enerjisini ve gençliğe dair taşıdığı anlamı her detayda hissettirebilmekti. Tasarladığımız her içerikte, gençlerin üretkenliğini, yenilikçi bakış açısını ve geleceğe dair umutlarını yansıtmayı hedefledik.\n\nİnanıyoruz ki güçlü fikirler, güçlü anlatımlarla daha etkili hale gelir. Bu nedenle ZENITH boyunca karşılaşacağınız her tasarımın ve her görsel detayın, sizlere bu büyük organizasyonun ruhunu hissettirmesini temenni ediyoruz.\n\nSizleri, ilham veren fikirlerin ve yaratıcılığın buluştuğu ZENITH Zirve 2026\'da görmekten mutluluk duyuyor; programımızın unutulmaz bir deneyime dönüşmesini diliyorum.\n\nSaygılarımla,\n\nEbrar Aygün\nZENITH Zirve 2026\nKreatif Başkanı'
     },
     akif: {
         name: 'Akif Efe Altunsoy',
         role: 'Kreatif Başkanı',
-        message: 'Değerli Ekibim,\n\nKreatif departmanı olarak zirvenin yüzünü oluşturacağız. Birlikte başaracağız.'
+        message: 'Değerli Katılımcılar,\n\nZENITH Zirve 2026\'nın ortaya çıkış sürecinde her detayın bir anlam taşıdığına ve her çalışmanın ortak bir vizyonu yansıttığına inanıyoruz. Kreatif Birim olarak görevimiz, bu vizyonu estetik ve etkili bir anlatımla sizlere ulaştırmak oldu.\n\nAylar süren hazırlık sürecinde, ZENITH\'in gençlik teması etrafında şekillenen ruhunu; tasarımlarımızda, içeriklerimizde ve tüm görsel çalışmalarımızda görünür kılmaya çalıştık. Çünkü bir organizasyonun akıllarda kalmasını sağlayan unsurlardan biri de ortaya koyduğu özgün kimliktir.\n\nBizler için yaratıcılık, yalnızca üretmek değil; aynı zamanda bir fikri etkili bir şekilde ifade edebilmektir. Bu anlayışla hazırladığımız her çalışmanın, ZENITH deneyiminizin anlamlı bir parçası olmasını diliyoruz.\n\nZENITH Zirve 2026\'nın sizler için ilham verici, verimli ve unutulmaz anılarla dolu bir deneyim olmasını temenni ediyor; katılımınız için teşekkür ediyorum.\n\nSaygılarımla,\n\nAkif Efe Altunsoy\nZENITH Zirve 2026\nKreatif Başkanı'
     },
     nihal: {
         name: 'Nihal Bayrak',
