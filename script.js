@@ -193,17 +193,17 @@ const teamMessages = {
     muhammed: {
         name: 'Muhammed Ömer Bozkuş',
         role: 'Genel Danışman',
-        message: 'Sevgili Ekibim,\n\nBu zirvenin başarısı için her birinizin desteği çok değerli. Birlikte çalışarak, birlikte başaracağız. Her adımda yanınızdayım.'
+        message: 'Değerli Katılımcılar,\n\nZENITH Zirve 2026, gençlerin fikirlerini özgürce paylaşabildiği, kendilerini geliştirebildiği ve geleceğe dair yeni ufuklar kazanabildiği önemli bir platform olarak ortaya çıkmıştır. Bu organizasyonu değerli kılan en önemli unsur ise ortak bir hedef etrafında bir araya gelen gençlerin ortaya koyduğu emek ve kararlılıktır.\n\nAylar süren hazırlık süreci boyunca farklı alanlarda görev alan ekiplerimizin özverili çalışmalarına tanıklık etmek, gençlerin sahip olduğu potansiyeli bir kez daha görmemizi sağlamıştır. Birlikte üretmenin, sorumluluk paylaşmanın ve ortak bir vizyon doğrultusunda hareket etmenin ortaya çıkardığı sinerji, ZENITH\'in en güçlü yönlerinden biridir.\n\nİnanıyorum ki bugün burada kurulan her bağ, paylaşılan her fikir ve kazanılan her deneyim, gelecekte çok daha büyük başarılara zemin hazırlayacaktır. ZENITH\'in yalnızca bir zirve değil, aynı zamanda gençlerin gelişim yolculuğuna katkı sunan kalıcı bir değer olması en büyük temennimizdir.\n\nBu anlamlı organizasyonda emeği bulunan tüm ekip üyelerini ve katılımlarıyla bizlere güç veren siz değerli misafirlerimizi tebrik ediyor, verimli bir zirve geçirmenizi diliyorum.\n\nSaygılarımla,\n\nMuhammed Ömer Bozkuş "Genel Mami"\nZENITH Zirve 2026\nGenel Danışman'
     },
     hanife: {
         name: 'Hanife Ezgi Gören',
         role: 'Genel Danışman',
-        message: 'Değerli Ekibim,\n\nSizinle çalışmak büyük bir onur. Her birinizin katkısı bu zirveyi özel kılıyor. Birlikte güzel işler başaracağız.'
+        message: 'Değerli Katılımcılar,\n\nBaşarılı organizasyonlar, yalnızca büyük hedeflerle değil; aynı zamanda sağlam planlama, sürdürülebilir bir çalışma anlayışı ve titizlikle yürütülen süreçlerle inşa edilir. ZENITH Zirve 2026 da bu anlayışın bir sonucu olarak ortaya çıkan kıymetli bir çalışmadır.\n\nHazırlık sürecinde gösterilen özveri, disiplin ve sorumluluk bilinci; organizasyonumuzun bugün ulaştığı noktada önemli bir paya sahiptir. Her detayın dikkatle ele alınması ve geleceğe yönelik güçlü bir vizyonla hareket edilmesi, ZENITH\'in kurumsal yapısını daha da güçlendirmiştir.\n\nGençlerin bir araya gelerek öğrenebildiği, üretebildiği ve ilham alabildiği bu ortamın uzun yıllar boyunca büyüyerek devam etmesini temenni ediyor; organizasyonun gerçekleşmesinde emeği bulunan tüm ekip arkadaşlarımızı gönülden kutluyorum.\n\nSaygılarımla,\n\nHanife Ezgi Gören\nZENITH Zirve 2026\nGenel Danışman'
     },
     emir: {
         name: 'Emir Kızıltuğ',
         role: 'Genel Danışman',
-        message: 'Sevgili Ekibim,\n\nBu yolculukta her birinizin emeği çok değerli. Birlikte çalışarak hedeflerimize ulaşacağız. Yanınızdayım.'
+        message: 'Değerli Katılımcılar,\n\nBir organizasyonun gerçek değeri, insanları ortak bir amaç etrafında bir araya getirebilmesinde ve kalıcı etkiler bırakabilmesinde saklıdır. ZENITH Zirve 2026 da farklı şehirlerden, farklı deneyimlerden ve farklı hedeflerden gelen gençleri aynı çatı altında buluşturan önemli bir organizasyondur.\n\nBugün burada yalnızca bilgi paylaşımı gerçekleşmiyor; aynı zamanda yeni dostluklar kuruluyor, farklı bakış açıları bir araya geliyor ve geleceğe yönelik yeni fikirler şekilleniyor. Bu yönüyle ZENITH\'in, katılımcıları arasında güçlü bağlar oluşturan ve gençlerin gelişimine katkı sunan özel bir platform olduğuna inanıyorum.\n\nZirvemiz boyunca edineceğiniz deneyimlerin, kuracağınız ilişkilerin ve paylaşacağınız fikirlerin sizlere uzun yıllar boyunca eşlik edecek değerli kazanımlara dönüşmesini diliyorum.\n\nBu vesileyle organizasyonun hayata geçirilmesinde emeği bulunan tüm ekip üyelerini tebrik ediyor, ZENITH Zirve 2026\'nın hepimiz için unutulmaz bir deneyim olmasını temenni ediyorum.\n\nSaygılarımla,\n\nEmir Kızıltuğ\nZENITH Zirve 2026\nGenel Danışman'
     },
     asude: {
         name: 'Asude Baran',
