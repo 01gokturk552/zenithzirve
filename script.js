@@ -208,12 +208,12 @@ const teamMessages = {
     asude: {
         name: 'Asude Baran',
         role: 'Organizasyon Başkanı',
-        message: 'Değerli Ekibim,\n\nOrganizasyon başkanı olarak zirvenin her aşamasında yanınızdayım. Birlikte çalışarak başaracağız.'
+        message: 'Değerli Katılımcılar,\n\nHer büyük organizasyon, güçlü bir ekip ruhu ve ortak bir hedef doğrultusunda verilen emeklerle hayat bulur. ZENITH Zirve 2026 da gençlerin gelişimine katkı sunmak amacıyla aylar süren planlama ve hazırlık çalışmalarının sonucunda ortaya çıkmıştır.\n\nOrganizasyon Birimi olarak önceliğimiz; katılımcılarımızın kendilerini rahat hissedebilecekleri, programın her aşamasının uyum içerisinde ilerlediği ve her detayın özenle düşünüldüğü bir zirve deneyimi oluşturmaktı. Bu süreçte gösterilen ekip çalışması ve özveri, ZENITH\'in en güçlü yönlerinden biri olmuştur.\n\nİnanıyoruz ki bir organizasyonu değerli kılan yalnızca içeriği değil; katılımcılarında bıraktığı etki ve oluşturduğu deneyimdir. Bu nedenle ZENITH\'in sizler için yeni fikirlerin, yeni dostlukların ve yeni hedeflerin başlangıç noktası olmasını temenni ediyoruz.\n\nKatılımınız ve desteğiniz için teşekkür ediyor, ZENITH Zirve 2026\'nın hepimiz adına ilham verici ve unutulmaz bir organizasyon olmasını diliyorum.\n\nSaygılarımla,\n\nAsude Baran\nZENITH Zirve 2026\nOrganizasyon Başkanı'
     },
     kerem: {
         name: 'Kerem Aytekin',
         role: 'Organizasyon Başkanı',
-        message: 'Sevgili Ekibim,\n\nOrganizasyon sürecinde her birinizin desteği çok değerli. Birlikte başaracağız.'
+        message: 'Değerli Katılımcılar,\n\nZENITH Zirve 2026\'nın ortaya çıkış süreci, ortak bir vizyon etrafında bir araya gelen büyük bir ekibin özverili çalışmalarının sonucudur. Organizasyon Birimi olarak temel hedefimiz; katılımcılarımızın verimli, düzenli ve unutulmaz bir zirve deneyimi yaşamalarını sağlayacak güçlü bir yapı oluşturmaktı.\n\nAylar boyunca yürüttüğümüz planlama ve koordinasyon çalışmalarıyla, ZENITH\'in her detayını titizlikle ele almaya gayret gösterdik. Çünkü inanıyoruz ki başarılı organizasyonlar, yalnızca etkinlik günüyle değil; arka planda yürütülen yoğun emek ve güçlü ekip çalışmasıyla şekillenir.\n\nBugün burada sizlerle bir araya gelmiş olmak, uzun süredir üzerinde çalıştığımız bu vizyonun gerçeğe dönüşmüş hâlini görmek bizler için büyük bir mutluluktur. Umuyoruz ki ZENITH boyunca edineceğiniz deneyimler, kuracağınız bağlantılar ve paylaşacağınız fikirler sizler için kalıcı kazanımlara dönüşecektir.\n\nProgramımıza katılarak bizlere güç verdiğiniz için teşekkür ediyor, ZENITH Zirve 2026\'nın başarılı ve verimli geçmesini diliyorum.\n\nSaygılarımla,\n\nKerem Aytekin\nZENITH Zirve 2026\nOrganizasyon Başkanı'
     },
     elif: {
         name: 'Elif Kaplan',
