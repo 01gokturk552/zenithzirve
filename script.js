@@ -253,12 +253,12 @@ const teamMessages = {
     nihal: {
         name: 'Nihal Bayrak',
         role: 'Basın Başkanı',
-        message: 'Sevgili Ekibim,\n\nBasın departmanı olarak zirvenin sesini duyuracağız. Birlikte çalışacağız.'
+        message: 'Değerli Katılımcılar,\n\nZENITH Zirve 2026, gençlerin fikirlerini paylaşabildiği, farklı bakış açılarıyla buluşabildiği ve geleceğe dair yeni perspektifler geliştirebildiği önemli bir platformdur. Basın Birimi olarak görevimiz, bu değerli buluşmanın ortaya koyduğu kazanımları en doğru şekilde kamuoyuna aktarmak ve zirvemizin oluşturduğu etkiyi daha geniş kitlelere ulaştırmaktır.\n\nBugün bilgi kadar bilginin doğru aktarılması da büyük önem taşımaktadır. Bu nedenle ZENITH boyunca gerçekleştirilecek oturumları, paylaşımları ve elde edilen çıktıları titizlikle takip ederek organizasyonumuzun sesini güçlü bir şekilde duyurmayı hedefliyoruz.\n\nİnanıyoruz ki gençliğin ortaya koyduğu fikirler, yalnızca bulunduğu salonda değil, ulaştığı her platformda değer üretmeye devam edecektir. Bu anlayışla ZENITH\'in gençliğin potansiyelini ve vizyonunu yansıtan önemli bir buluşma noktası olmasını temenni ediyoruz.\n\nProgramımıza katılımınız için teşekkür ediyor, ZENITH Zirve 2026\'nın hepimiz için verimli ve ilham verici geçmesini diliyorum.\n\nSaygılarımla,\n\nNihal Bayrak\nZENITH Zirve 2026\nBasın Başkanı'
     },
     omer: {
         name: 'Ömer Kamil Okutan',
         role: 'Basın Başkanı',
-        message: 'Değerli Ekibim,\n\nMedya ilişkilerinde en iyi sonucu almak için çalışıyoruz. Birlikte başaracağız.'
+        message: 'Değerli Katılımcılar,\n\nHer güçlü organizasyon, yalnızca gerçekleştirildiği anla değil; bıraktığı etki ve oluşturduğu değerle anlam kazanır. ZENITH Zirve 2026 da gençliğin bilgi, vizyon ve üretkenlik ekseninde bir araya geldiği önemli bir organizasyon olarak bu anlayışın temsilcilerinden biridir.\n\nBasın Birimi olarak amacımız; zirvemiz boyunca ortaya çıkan fikirleri, yürütülen çalışmaları ve elde edilen kazanımları doğru, tarafsız ve etkili bir şekilde kamuoyuna aktarmaktır. Çünkü gençlerin ortaya koyduğu her değerli düşüncenin daha geniş kitlelere ulaşmayı hak ettiğine inanıyoruz.\n\nZENITH\'in yalnızca katılımcıları için değil, gençliğin geleceğine dair söz söyleyen herkes için ilham veren bir platform olmasını temenni ediyor; bu önemli yolculuğun bir parçası olduğunuz için sizlere teşekkür ediyorum.\n\nSaygılarımla,\n\nÖmer Kamil Okutan\nZENITH Zirve 2026\nBasın Başkanı'
     },
     meyra: {
         name: 'Meyra Paçali',
