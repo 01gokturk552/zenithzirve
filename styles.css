@@ -590,7 +590,10 @@ body {
 
 /* Goals List */
 .goals-list {
-    max-width: 800px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
@@ -603,9 +606,14 @@ body {
     -webkit-backdrop-filter: blur(14px) saturate(140%);
     border: 1px solid var(--glass-border);
     border-radius: 16px;
-    margin-bottom: 1.5rem;
     box-shadow: var(--shadow-card);
     align-items: flex-start;
+}
+
+.goal-item:nth-child(5) {
+    grid-column: 1 / -1;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .goal-number {
