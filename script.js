@@ -263,7 +263,7 @@ const teamMessages = {
     meyra: {
         name: 'Meyra Paçali',
         role: 'Finans Başkanı',
-        message: 'Sevgili Ekibim,\n\nFinans departmanı olarak zirvenin bütçesini yönetiyoruz. Her birinizin desteği için teşekkür ederim.'
+        message: 'Değerli Katılımcılar,\n\nZENITH Zirve 2026, gençlerin bilgi, deneyim ve vizyon etrafında bir araya geldiği önemli bir organizasyon olmanın yanı sıra; planlama, koordinasyon ve güçlü bir ekip çalışmasının ürünü olarak hayata geçirilmiştir. Bu sürecin sağlıklı bir şekilde ilerleyebilmesi için finansal kaynakların etkin, verimli ve sürdürülebilir bir anlayışla yönetilmesi büyük önem taşımaktadır.\n\nFinans Birimi olarak temel sorumluluğumuz; organizasyonun ihtiyaç duyduğu kaynakların doğru şekilde planlanmasını sağlamak ve ZENITH\'in hedeflerine ulaşabilmesi için güçlü bir mali yapı oluşturmaktır. Hazırlık süreci boyunca her çalışmayı, organizasyonumuzun uzun vadeli vizyonunu göz önünde bulundurarak değerlendirmeye özen gösterdik.\n\nİnanıyoruz ki başarılı organizasyonlar yalnızca sahnede görünen çalışmalarla değil, aynı zamanda arka planda yürütülen titiz planlama süreçleriyle de değer kazanır. Bu anlayışla ZENITH Zirve 2026\'nın her yönüyle güçlü, sürdürülebilir ve verimli bir organizasyon olması için çalışmalarımızı sürdürdük.\n\nBu vesileyle organizasyonumuza destek veren tüm paydaşlarımıza, ekip arkadaşlarımıza ve katılımlarıyla ZENITH\'e değer katan siz kıymetli misafirlerimize teşekkür ediyorum.\n\nZENITH Zirve 2026\'nın hepimiz için ilham verici, başarılı ve unutulmaz bir deneyim olmasını temenni ediyorum.\n\nSaygılarımla,\n\nMeyra Paçali\nZENITH Zirve 2026\nFinans Başkanı'
     },
     omur: {
         name: 'Ömür Aydın',
