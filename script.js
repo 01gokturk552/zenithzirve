@@ -213,7 +213,7 @@ const teamMessages = {
     cemre: {
         name: 'Cemre Seçkin',
         role: 'Halkla İlişkiler Başkanı',
-        message: 'Sevgili Ekibim,\n\nİletişim gücümüzle zirveyi daha da güçlendireceğiz. Birlikte başaracağız.'
+        message: 'Değerli Katılımcılar,\n\nZENITH Zirve 2026\'nın temelinde yalnızca bilgi paylaşımı değil, aynı zamanda güçlü bir iletişim kültürü ve katılımcı deneyimi anlayışı yer almaktadır. Bizler Halkla İlişkiler Birimi olarak, zirvemize katılan her bireyin kendisini bu organizasyonun değerli bir paydaşı olarak hissetmesini amaçlıyoruz.\n\nAylar süren hazırlık sürecinde önceliğimiz; sizlere güvenilir, erişilebilir ve etkin bir iletişim ağı sunmak oldu. Katılımcılarımızın ihtiyaç duydukları her konuda doğru bilgiye zamanında ulaşabilmeleri, süreç boyunca kendilerini desteklenmiş hissetmeleri ve ZENITH deneyimini en iyi şekilde yaşayabilmeleri için çalışmalarımızı titizlikle sürdürüyoruz.\n\nİnanıyoruz ki başarılı organizasyonlar yalnızca program içerikleriyle değil, katılımcılarıyla kurduğu güçlü bağlarla da anlam kazanır. Bu nedenle ZENITH\'in; yeni dostlukların kurulduğu, farklı fikirlerin buluştuğu ve ilham verici anıların biriktiği özel bir deneyime dönüşmesini hedefliyoruz.\n\nBu büyük organizasyonun bir parçası olduğunuz için teşekkür ediyor, ZENITH Zirve 2026\'nın sizler için verimli, keyifli ve unutulmaz bir deneyim olmasını temenni ediyorum.\n\nSaygılarımla,\n\nCemre Seçkin\nZENITH Zirve 2026\nHalkla İlişkiler Başkanı'
     },
     asli: {
         name: 'Aslı Subaşı',
