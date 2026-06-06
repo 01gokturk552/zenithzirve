@@ -208,7 +208,7 @@ const teamMessages = {
     elif: {
         name: 'Elif Kaplan',
         role: 'Halkla İlişkiler Başkanı',
-        message: 'Değerli Ekibim,\n\nHalkla İlişkiler departmanı olarak zirvenin sesi olacağız. Birlikte çalışarak en iyi iletişimi sağlayacağız.'
+        message: 'Değerli Katılımcılar,\n\nBizler Halkla İlişkiler Birimi olarak, ZENITH Zirve 2026\'nın yalnızca belirli oturumların gerçekleştirildiği bir organizasyon olmasının ötesinde; katılımcılarımızın kendilerini değerli hissettikleri, yeni insanlarla tanıştıkları ve aidiyet duygusunu deneyimledikleri bir buluşma noktası olmasını hedefliyoruz.\n\nBu doğrultuda hazırlık sürecinin ilk gününden programın son anına kadar sizlerle güçlü, samimi ve sürdürülebilir bir iletişim kurmaya özen gösteriyoruz. Başvuru sürecinden etkinlik gününe, bilgilendirmelerden katılımcı deneyimine kadar her aşamada sizlerin yanında olarak ZENITH deneyimini en verimli şekilde yaşamanıza katkı sunmayı amaçlıyoruz.\n\nİnanıyoruz ki bir zirveyi değerli kılan yalnızca gerçekleştirilen oturumlar değil; kurulan dostluklar, paylaşılan deneyimler ve geride bırakılan güzel hatıralardır. Bu nedenle ZENITH boyunca her bir katılımcımızın kendisini bu büyük ailenin önemli bir parçası olarak hissetmesini önemsiyoruz.\n\nZENITH Zirve 2026\'da sizleri öğrenmeye, ilham almaya, yeni bağlantılar kurmaya ve unutulmaz bir deneyimin parçası olmaya davet ediyorum.\n\nSaygılarımla,\n\nElif Kaplan\nZENITH Zirve 2026\nHalkla İlişkiler Başkanı'
     },
     cemre: {
         name: 'Cemre Seçkin',
