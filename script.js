@@ -205,6 +205,16 @@ const teamMessages = {
         role: 'Genel Danışman',
         message: 'Sevgili Ekibim,\n\nBu yolculukta her birinizin emeği çok değerli. Birlikte çalışarak hedeflerimize ulaşacağız. Yanınızdayım.'
     },
+    asude: {
+        name: 'Asude Baran',
+        role: 'Organizasyon Başkanı',
+        message: 'Değerli Ekibim,\n\nOrganizasyon başkanı olarak zirvenin her aşamasında yanınızdayım. Birlikte çalışarak başaracağız.'
+    },
+    kerem: {
+        name: 'Kerem Aytekin',
+        role: 'Organizasyon Başkanı',
+        message: 'Sevgili Ekibim,\n\nOrganizasyon sürecinde her birinizin desteği çok değerli. Birlikte başaracağız.'
+    },
     elif: {
         name: 'Elif Kaplan',
         role: 'Halkla İlişkiler Başkanı',
