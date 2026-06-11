@@ -281,3 +281,61 @@ document.querySelectorAll('.team-card').forEach(card => {
         }
     });
 });
+
+// Personel Girişi (footer) — panel seçim penceresi
+(function () {
+    const footerBottom = document.querySelector('.footer-bottom');
+    if (!footerBottom) return;
+
+    const trigger = document.createElement('button');
+    trigger.type = 'button';
+    trigger.className = 'staff-login';
+    trigger.textContent = 'Personel Girişi';
+    footerBottom.appendChild(trigger);
+
+    let modal = null;
+    let lastFocus = null;
+
+    function buildModal() {
+        const overlay = document.createElement('div');
+        overlay.className = 'staff-modal';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', 'Personel girişi');
+        overlay.innerHTML =
+            '<div class="staff-modal-card">' +
+                '<button type="button" class="staff-close" aria-label="Kapat">&times;</button>' +
+                '<h3>Personel Girişi</h3>' +
+                '<p class="sub">Lütfen panelinizi seçin</p>' +
+                '<div class="staff-options">' +
+                    '<a class="staff-option" href="admin-login.html">⚙️ Admin Paneli</a>' +
+                    '<a class="staff-option" href="ik-login.html">👥 İK Paneli</a>' +
+                '</div>' +
+            '</div>';
+        document.body.appendChild(overlay);
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) closeStaff(); });
+        overlay.querySelector('.staff-close').addEventListener('click', closeStaff);
+        return overlay;
+    }
+
+    function openStaff() {
+        if (!modal) modal = buildModal();
+        lastFocus = document.activeElement;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        const firstOpt = modal.querySelector('.staff-option');
+        if (firstOpt) firstOpt.focus();
+    }
+
+    function closeStaff() {
+        if (!modal) return;
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+        if (lastFocus) { lastFocus.focus(); lastFocus = null; }
+    }
+
+    trigger.addEventListener('click', openStaff);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && modal.classList.contains('open')) closeStaff();
+    });
+})();

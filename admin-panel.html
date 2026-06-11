@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Paneli | Zenith Zirve'26</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="panel.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="panel-body">
+    <div id="app">
+        <header class="panel-topbar">
+            <div class="container">
+                <div class="panel-brand">
+                    <a href="index.html" class="logo">Zenith Zirve'26</a>
+                    <span class="tag">Admin</span>
+                </div>
+                <div class="panel-actions">
+                    <a class="panel-link" href="ik-login.html">İK Paneli →</a>
+                    <a class="panel-link" href="index.html" target="_blank" rel="noopener">Siteyi Aç ↗</a>
+                    <button id="logoutBtn" class="pbtn pbtn-ghost pbtn-sm">Çıkış</button>
+                </div>
+            </div>
+        </header>
+
+        <main class="panel-main">
+            <div class="container">
+                <div class="panel-head">
+                    <h1>İçerik Yönetimi</h1>
+                    <p>Konuşmacıları ve etkinlik akışını buradan düzenleyebilirsiniz.</p>
+                </div>
+
+                <div id="modeBanner" class="mode-banner" hidden></div>
+                <div id="globalStatus" class="status"></div>
+
+                <div class="panel-tabs">
+                    <button class="panel-tab active" data-pane="speakers">Konuşmacılar</button>
+                    <button class="panel-tab" data-pane="program">Program</button>
+                </div>
+
+                <!-- Konuşmacılar -->
+                <section id="pane-speakers" class="panel-pane active">
+                    <div class="toolbar">
+                        <button id="addSpeaker" class="pbtn pbtn-ghost">＋ Konuşmacı Ekle</button>
+                        <button id="seedSpeakers" class="pbtn pbtn-ghost" hidden>Mevcut içerikle doldur</button>
+                        <span id="spkCount" class="count-badge"></span>
+                    </div>
+                    <div id="speakerList" class="card-list"></div>
+                    <div class="save-bar">
+                        <span id="spkDirty" class="dirty-note"></span>
+                        <button id="reloadSpeakers" class="pbtn pbtn-ghost">Yenile</button>
+                        <button id="saveSpeakers" class="pbtn pbtn-primary">Konuşmacıları Kaydet</button>
+                    </div>
+                </section>
+
+                <!-- Program -->
+                <section id="pane-program" class="panel-pane">
+                    <div class="toolbar">
+                        <button class="pbtn pbtn-ghost" data-add-day="1">＋ 1. Güne Ekle</button>
+                        <button class="pbtn pbtn-ghost" data-add-day="2">＋ 2. Güne Ekle</button>
+                        <button id="seedProgram" class="pbtn pbtn-ghost" hidden>Mevcut içerikle doldur</button>
+                        <span id="progCount" class="count-badge"></span>
+                    </div>
+                    <div id="programList" class="card-list"></div>
+                    <div class="save-bar">
+                        <span id="progDirty" class="dirty-note"></span>
+                        <button id="reloadProgram" class="pbtn pbtn-ghost">Yenile</button>
+                        <button id="saveProgram" class="pbtn pbtn-primary">Programı Kaydet</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="default-data.js"></script>
+    <script src="panel-common.js"></script>
+    <script src="admin-panel.js"></script>
+</body>
+</html>

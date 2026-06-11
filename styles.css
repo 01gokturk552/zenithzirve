@@ -1548,3 +1548,104 @@ body::before {
     transform: translateY(-5px);
     box-shadow: var(--shadow-glow);
 }
+
+/* Personel Girişi (footer) */
+.staff-login {
+    margin-top: 0.85rem;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--primary-foreground);
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    padding: 0.4rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: opacity 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.staff-login:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Personel girişi — panel seçim penceresi */
+.staff-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.staff-modal.open { display: flex; }
+
+.staff-modal-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-card);
+    width: 100%;
+    max-width: 420px;
+    padding: 2.25rem 2rem;
+    text-align: center;
+    position: relative;
+    animation: modalFadeIn 0.3s ease;
+}
+
+.staff-modal-card h3 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+}
+
+.staff-modal-card .sub {
+    color: var(--muted-foreground);
+    margin-bottom: 1.5rem;
+}
+
+.staff-options { display: grid; gap: 1rem; }
+
+.staff-option {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--primary);
+    border-radius: 12px;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.staff-option:hover {
+    background: var(--primary);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.staff-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.9rem;
+    background: none;
+    border: none;
+    font-size: 26px;
+    line-height: 1;
+    color: var(--muted-foreground);
+    cursor: pointer;
+    padding: 0.25rem;
+}
+
+.staff-close:hover { color: var(--foreground); }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Girişi | Zenith Zirve'26</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="panel.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="panel-body">
+    <div class="login-wrap">
+        <form id="loginForm" class="login-card">
+            <div class="logo">Zenith Zirve'26</div>
+            <h1>Admin Paneli Girişi</h1>
+            <div id="loginStatus" class="status"></div>
+            <div class="field">
+                <label for="pw">Şifre</label>
+                <input type="password" id="pw" autocomplete="current-password" required autofocus>
+            </div>
+            <button type="submit" class="pbtn pbtn-primary" style="width:100%; justify-content:center;">Giriş Yap</button>
+            <p id="demoHint" class="field-hint" hidden style="margin-top:1rem;"></p>
+            <p style="margin-top:1.25rem;">
+                <a class="panel-link" href="ik-login.html">İK Girişi →</a>
+                &nbsp;·&nbsp;
+                <a class="panel-link" href="index.html">← Siteye dön</a>
+            </p>
+        </form>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="default-data.js"></script>
+    <script src="panel-common.js"></script>
+    <script>window.LOGIN_ROLE = "admin"; window.LOGIN_REDIRECT = "admin-panel.html";</script>
+    <script src="login.js"></script>
+</body>
+</html>
