@@ -3,22 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Program - Zenith Zirve'26</title>
-    <meta name="description" content="Zenith Zirve 2026 programını inceleyin. İki günlük etkinlik akışı.">
+    <title>Program | Zenith Zirve'26</title>
+    <meta name="description" content="Zenith Zirve'26 etkinlik programı. 27-28 Haziran 2026 tarihlerinde gerçekleşecek iki günlük zirve akışı ve oturumlar.">
+    <meta name="author" content="Zenith Zirve">
+    <meta name="theme-color" content="#1e3a8a">
+    <link rel="canonical" href="https://01gokturk552.github.io/zenithzirve/program.html">
+
+    <!-- Open Graph / Sosyal Medya -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Zenith Zirve'26">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:title" content="Program | Zenith Zirve'26">
+    <meta property="og:description" content="27-28 Haziran 2026 tarihlerinde gerçekleşecek iki günlük zirve akışı ve oturumlar.">
+    <meta property="og:url" content="https://01gokturk552.github.io/zenithzirve/program.html">
+    <meta property="og:image" content="https://01gokturk552.github.io/zenithzirve/zenithzirve.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Program | Zenith Zirve'26">
+    <meta name="twitter:description" content="27-28 Haziran 2026 — iki günlük zirve akışı ve oturumlar.">
+    <meta name="twitter:image" content="https://01gokturk552.github.io/zenithzirve/zenithzirve.png">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="zenithzirve.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <a class="skip-link" href="#main">İçeriğe geç</a>
     <!-- Navigasyon -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Ana navigasyon">
         <div class="container">
             <div class="nav-brand">
                 <a href="index.html">Zenith Zirve'26</a>
             </div>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">Ana Sayfa</a></li>
                 <li><a href="hakkimizda.html">Hakkımızda</a></li>
                 <li><a href="ekibimiz.html">Ekibimiz</a></li>
@@ -27,14 +46,15 @@
                 <li><a href="iletisim.html">İletişim</a></li>
                 <li><a href="basvuru.html" class="btn-nav">Başvuru</a></li>
             </ul>
-            <div class="hamburger">
+            <button class="hamburger" type="button" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
+    <main id="main">
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
@@ -76,7 +96,7 @@
                         <div class="program-time">10.30 – 11.20</div>
                         <div class="program-content">
                             <div class="program-speaker">
-                                <img src="konuşmacılarımız/serapırmak.png" alt="Serap Irmak" class="program-speaker-photo">
+                                <img src="konuşmacılarımız/serapırmak.png" alt="Serap Irmak" class="program-speaker-photo" width="50" height="50" loading="lazy" decoding="async">
                                 <div>
                                     <h3>1. Oturum</h3>
                                     <p class="speaker-name">Serap Irmak</p>
@@ -97,8 +117,8 @@
                         <div class="program-time">11.50 – 12.40</div>
                         <div class="program-content">
                             <div class="program-speaker">
-                                <img src="konuşmacılarımız/hasankutuk.png" alt="Doç. Dr. Hasan Kütük" class="program-speaker-photo">
-                                <img src="konuşmacılarımız/halenurkutuk.png" alt="Öğr. Gör. Halenur Kütük" class="program-speaker-photo">
+                                <img src="konuşmacılarımız/hasankutuk.png" alt="Doç. Dr. Hasan Kütük" class="program-speaker-photo" width="50" height="50" loading="lazy" decoding="async">
+                                <img src="konuşmacılarımız/halenurkutuk.png" alt="Öğr. Gör. Halenur Kütük" class="program-speaker-photo" width="50" height="50" loading="lazy" decoding="async">
                                 <div>
                                     <h3>2. Oturum</h3>
                                     <p class="speaker-name">Doç. Dr. Hasan Kütük & Öğr. Gör. Halenur Kütük</p>
@@ -118,7 +138,7 @@
                         <div class="program-time">13.40 – 14.30</div>
                         <div class="program-content">
                             <div class="program-speaker">
-                                <img src="konuşmacılarımız/yavuzdizdar.png" alt="Dr. Yavuz Dizdar" class="program-speaker-photo">
+                                <img src="konuşmacılarımız/yavuzdizdar.png" alt="Dr. Yavuz Dizdar" class="program-speaker-photo" width="50" height="50" loading="lazy" decoding="async">
                                 <div>
                                     <h3>3. Oturum</h3>
                                     <p class="speaker-name">Dr. Yavuz Dizdar</p>
@@ -153,8 +173,8 @@
                         <div class="program-time">16.30 – 17.20</div>
                         <div class="program-content">
                             <div class="program-speaker">
-                                <img src="konuşmacılarımız/lunealumen.png" alt="#10906 Lunea Lumen" class="program-speaker-photo">
-                                <img src="konuşmacılarımız/cygnus.png" alt="Cygnus Robotics" class="program-speaker-photo">
+                                <img src="konuşmacılarımız/lunealumen.png" alt="#10906 Lunea Lumen" class="program-speaker-photo" width="50" height="50" loading="lazy" decoding="async">
+                                <img src="konuşmacılarımız/cygnus.png" alt="Cygnus Robotics" class="program-speaker-photo" width="50" height="50" loading="lazy" decoding="async">
                                 <div>
                                     <h3>4. Oturum</h3>
                                     <p class="speaker-name">#10906 Lunea Lumen & Cygnus Robotics (#9473)</p>
@@ -185,7 +205,7 @@
                         <div class="program-time">09.40 – 10.30</div>
                         <div class="program-content">
                             <div class="program-speaker">
-                                <img src="konuşmacılarımız/ayrinibiş.png" alt="Ayrin İbiş" class="program-speaker-photo">
+                                <img src="konuşmacılarımız/ayrinibiş.png" alt="Ayrin İbiş" class="program-speaker-photo" width="50" height="50" loading="lazy" decoding="async">
                                 <div>
                                     <h3>5. Oturum</h3>
                                     <p class="speaker-name">Ayrin İbiş</p>
@@ -206,7 +226,7 @@
                         <div class="program-time">11.00 – 11.50</div>
                         <div class="program-content">
                             <div class="program-speaker">
-                                <img src="konuşmacılarımız/emircanturan.png" alt="Emircan Turan" class="program-speaker-photo">
+                                <img src="konuşmacılarımız/emircanturan.png" alt="Emircan Turan" class="program-speaker-photo" width="50" height="50" loading="lazy" decoding="async">
                                 <div>
                                     <h3>6. Oturum</h3>
                                     <p class="speaker-name">Emircan Turan</p>
@@ -227,7 +247,7 @@
                         <div class="program-time">12.20 – 13.10</div>
                         <div class="program-content">
                             <div class="program-speaker">
-                                <img src="konuşmacılarımız/avnibilaldemirtaş.png" alt="Avni Bilal Demirtaş" class="program-speaker-photo">
+                                <img src="konuşmacılarımız/avnibilaldemirtaş.png" alt="Avni Bilal Demirtaş" class="program-speaker-photo" width="50" height="50" loading="lazy" decoding="async">
                                 <div>
                                     <h3>7. Oturum</h3>
                                     <p class="speaker-name">Avni Bilal Demirtaş</p>
@@ -248,7 +268,7 @@
                         <div class="program-time">15.00 – 15.50</div>
                         <div class="program-content">
                             <div class="program-speaker">
-                                <img src="konuşmacılarımız/Uzm. Dyt. Şevval Beyza Kulaksız.png" alt="Uzm. Dyt. Şevval Beyza Kulaksız" class="program-speaker-photo">
+                                <img src="konuşmacılarımız/Uzm. Dyt. Şevval Beyza Kulaksız.png" alt="Uzm. Dyt. Şevval Beyza Kulaksız" class="program-speaker-photo" width="50" height="50" loading="lazy" decoding="async">
                                 <div>
                                     <h3>8. Oturum</h3>
                                     <p class="speaker-name">Uzm. Dyt. Şevval Beyza Kulaksız</p>
@@ -292,6 +312,7 @@
             <a href="basvuru.html" class="btn btn-primary btn-large">Hemen Başvur</a>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">

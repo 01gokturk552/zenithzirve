@@ -2,133 +2,65 @@
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
-hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
+if (hamburger && navMenu) {
+    const toggleMenu = (open) => {
+        const isOpen = open ?? !navMenu.classList.contains('active');
+        hamburger.classList.toggle('active', isOpen);
+        navMenu.classList.toggle('active', isOpen);
+        hamburger.setAttribute('aria-expanded', String(isOpen));
+    };
 
-// Menü linklerine tıklandığında menüyü kapat
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+    hamburger.addEventListener('click', () => toggleMenu());
+
+    // Menü linklerine tıklandığında menüyü kapat
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => toggleMenu(false));
     });
-});
+}
 
-// Smooth scroll
+// Smooth scroll (sayfa içi bağlantılar)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        const target = document.querySelector(href);
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth'
-            });
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth' });
+            // Ekran okuyucu / klavye için odağı hedefe taşı
+            target.setAttribute('tabindex', '-1');
+            target.focus({ preventScroll: true });
         }
     });
 });
 
-// Navbar scroll efekti
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
-    } else {
-        navbar.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
-    }
-});
+// Navbar kaydırma efekti
+const navbar = document.querySelector('.navbar');
+if (navbar) {
+    const onScroll = () => navbar.classList.toggle('scrolled', window.scrollY > 50);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+}
 
-// Aktif sayfa linki
-const currentPage = window.location.pathname;
-document.querySelectorAll('.nav-menu a').forEach(link => {
-    if (link.getAttribute('href') === currentPage || 
-        (currentPage === '/' && link.getAttribute('href') === 'index.html')) {
-        link.classList.add('active');
-    }
-});
-
-// İstatistik animasyonu
-const animateStats = () => {
-    const stats = document.querySelectorAll('.stat-number');
-    stats.forEach(stat => {
-        const target = parseInt(stat.textContent);
-        const duration = 2000;
-        const step = target / (duration / 16);
-        let current = 0;
-        
-        const updateStat = () => {
-            current += step;
-            if (current < target) {
-                stat.textContent = Math.floor(current);
-                requestAnimationFrame(updateStat);
-            } else {
-                stat.textContent = target;
-            }
-        };
-        
-        updateStat();
-    });
-};
-
-// Sayfa yüklendiğinde istatistik animasyonunu başlat
-window.addEventListener('load', () => {
-    setTimeout(animateStats, 500);
-});
-
-// Scroll animasyonları
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
+// Görünüme giren kartlar için yumuşak beliriş animasyonu
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
         }
     });
-}, observerOptions);
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-// Animasyon eklenecek elementler
-document.querySelectorAll('.feature-card, .commission-card, .timeline-item').forEach(el => {
+document.querySelectorAll(
+    '.feature-card, .value-card, .goal-item, .team-card, .speaker-card, .program-item, .commission-card, .timeline-item'
+).forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
 });
-
-// Form gönderimi (başvuru sayfası için)
-const form = document.querySelector('form');
-if (form) {
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        // Form verilerini al
-        const formData = new FormData(form);
-        const data = Object.fromEntries(formData);
-        
-        // Basit validasyon
-        let isValid = true;
-        const requiredFields = form.querySelectorAll('[required]');
-        
-        requiredFields.forEach(field => {
-            if (!field.value.trim()) {
-                isValid = false;
-                field.style.borderColor = '#ef4444';
-            } else {
-                field.style.borderColor = '#e5e7eb';
-            }
-        });
-        
-        if (isValid) {
-            alert('Başvurunuz başarıyla alındı! En kısa sürede size dönüş yapacağız.');
-            form.reset();
-        } else {
-            alert('Lütfen tüm zorunlu alanları doldurun.');
-        }
-    });
-}
 
 // Geri sayım sayacı (etkinlik tarihine kadar)
 const countdown = () => {
@@ -188,7 +120,7 @@ const teamMessages = {
     ada: {
         name: 'Ada Nehir Şahin',
         role: 'Genel Koordinatör',
-        message: 'Kıymetli Katılımcılar,\n\nZENITH fikri ortaya çıktığında hayalimiz; gençlerin kendilerini özgürce ifade edebilecekleri, farklı düşüncelerle buluşabilecekleri ve geleceğe dair güçlü perspektifler geliştirebilecekleri bir ortam oluşturmaktı. Bu doğrultuda ZENITH\'i yalnızca belirli oturumların gerçekleştirildiği bir zirve olarak değil; gençlerin potansiyellerini keşfedebilecekleri, ilham alabilecekleri ve yeni ufuklar kazanabilecekleri bir buluşma noktası olarak tasarladık.\n\nŞubat ayından bu yana büyük bir heyecan ve özveriyle sürdürdüğümüz hazırlık sürecinde en önemli motivasyonumuz, gençlerin bilgiye, tecrübeye ve farklı bakış açılarına erişebilecekleri nitelikli bir platform oluşturmaktı. Bugün burada sizlerle bir arada olmak ve aylar boyunca emek verdiğimiz bu vizyonun gerçeğe dönüştüğünü görmek bizler için son derece anlamlıdır.\n\nGençliğin yalnızca geleceğin temsilcisi değil, aynı zamanda bugünün değişim ve dönüşüm süreçlerinin de önemli bir parçası olduğuna inanıyoruz. Bu nedenle gençlerin fikirlerini önemsemeyi, onların gelişimlerine katkı sunmayı ve potansiyellerini ortaya çıkarabilecekleri alanlar oluşturmayı büyük bir sorumluluk olarak görüyoru z. Çünkü yarınları şekillendirecek olanlar; öğrenmeye açık, sorumluluk sahibi ve üretken bireylerdir.\n\nZENITH boyunca gerçekleştirilecek oturumların, kurulacak yeni bağlantıların ve paylaşılacak deneyimlerin her bir katılımcı için değerli kazanımlara dönüşmesini temenni ediyoruz. Zirvemizin, gençlerin hayallerini büyüten ve hedeflerine ulaşma yolunda onlara ilham veren bir deneyim olmasını diliyoruz.\n\nŞahsım adına ifade etmek isterim ki; bu sürecin her aşamasında birlikte çalıştığımız Eş Genel Koordinatörüm Yiğit Efe Sevir\'e, organizasyon ekibimize, destekçilerimize ve katılımlarıyla bizlere güç veren tüm misafirlerimize teşekkür ediyorum.\n\nBu vesileyle sizleri, ZENITH Zirve 2026\'nın sunduğu bilgi, deneyim ve ilham dolu yolculuğun bir parçası olmaya davet ediyor; programımızın hepimiz için verimli ve unutulmaz geçmesini temenni ediyorum.\n\nSaygılarımla,\n\nAda Nehir Şahin\nZENITH Zirve 2026 Genel Koordinatörü'
+        message: 'Kıymetli Katılımcılar,\n\nZENITH fikri ortaya çıktığında hayalimiz; gençlerin kendilerini özgürce ifade edebilecekleri, farklı düşüncelerle buluşabilecekleri ve geleceğe dair güçlü perspektifler geliştirebilecekleri bir ortam oluşturmaktı. Bu doğrultuda ZENITH\'i yalnızca belirli oturumların gerçekleştirildiği bir zirve olarak değil; gençlerin potansiyellerini keşfedebilecekleri, ilham alabilecekleri ve yeni ufuklar kazanabilecekleri bir buluşma noktası olarak tasarladık.\n\nŞubat ayından bu yana büyük bir heyecan ve özveriyle sürdürdüğümüz hazırlık sürecinde en önemli motivasyonumuz, gençlerin bilgiye, tecrübeye ve farklı bakış açılarına erişebilecekleri nitelikli bir platform oluşturmaktı. Bugün burada sizlerle bir arada olmak ve aylar boyunca emek verdiğimiz bu vizyonun gerçeğe dönüştüğünü görmek bizler için son derece anlamlıdır.\n\nGençliğin yalnızca geleceğin temsilcisi değil, aynı zamanda bugünün değişim ve dönüşüm süreçlerinin de önemli bir parçası olduğuna inanıyoruz. Bu nedenle gençlerin fikirlerini önemsemeyi, onların gelişimlerine katkı sunmayı ve potansiyellerini ortaya çıkarabilecekleri alanlar oluşturmayı büyük bir sorumluluk olarak görüyoruz. Çünkü yarınları şekillendirecek olanlar; öğrenmeye açık, sorumluluk sahibi ve üretken bireylerdir.\n\nZENITH boyunca gerçekleştirilecek oturumların, kurulacak yeni bağlantıların ve paylaşılacak deneyimlerin her bir katılımcı için değerli kazanımlara dönüşmesini temenni ediyoruz. Zirvemizin, gençlerin hayallerini büyüten ve hedeflerine ulaşma yolunda onlara ilham veren bir deneyim olmasını diliyoruz.\n\nŞahsım adına ifade etmek isterim ki; bu sürecin her aşamasında birlikte çalıştığımız Eş Genel Koordinatörüm Yiğit Efe Sevir\'e, organizasyon ekibimize, destekçilerimize ve katılımlarıyla bizlere güç veren tüm misafirlerimize teşekkür ediyorum.\n\nBu vesileyle sizleri, ZENITH Zirve 2026\'nın sunduğu bilgi, deneyim ve ilham dolu yolculuğun bir parçası olmaya davet ediyor; programımızın hepimiz için verimli ve unutulmaz geçmesini temenni ediyorum.\n\nSaygılarımla,\n\nAda Nehir Şahin\nZENITH Zirve 2026 Genel Koordinatörü'
     },
     muhammed: {
         name: 'Muhammed Ömer Bozkuş',
@@ -278,27 +210,74 @@ const teamMessages = {
 };
 
 // Modal fonksiyonları
+let lastFocusedElement = null;
+
 function showMessage(memberId) {
     const modal = document.getElementById('messageModal');
     const member = teamMessages[memberId];
-    
-    if (member) {
+
+    if (modal && member) {
+        lastFocusedElement = document.activeElement;
         document.getElementById('modalName').textContent = member.name;
         document.getElementById('modalRole').textContent = member.role;
         document.getElementById('modalMessage').textContent = member.message;
         modal.style.display = 'block';
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+
+        const content = modal.querySelector('.modal-content');
+        if (content) {
+            content.setAttribute('tabindex', '-1');
+            content.scrollTop = 0;
+            content.focus();
+        }
     }
 }
 
 function closeModal() {
     const modal = document.getElementById('messageModal');
+    if (!modal) return;
     modal.style.display = 'none';
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (lastFocusedElement) {
+        lastFocusedElement.focus();
+        lastFocusedElement = null;
+    }
 }
 
 // Modal dışına tıklandığında kapat
-window.onclick = function(event) {
+window.addEventListener('click', (event) => {
     const modal = document.getElementById('messageModal');
-    if (event.target == modal) {
-        modal.style.display = 'none';
+    if (modal && event.target === modal) {
+        closeModal();
     }
-}
+});
+
+// ESC tuşu ile modalı / mobil menüyü kapat
+document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const modal = document.getElementById('messageModal');
+    if (modal && modal.style.display === 'block') {
+        closeModal();
+    } else if (navMenu && navMenu.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+    }
+});
+
+// Ekip kartlarını klavye ile erişilebilir hale getir
+document.querySelectorAll('.team-card').forEach(card => {
+    if (!card.hasAttribute('onclick')) return;
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    const name = card.querySelector('h4');
+    if (name) card.setAttribute('aria-label', name.textContent + ' – mesajını oku');
+    card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            card.click();
+        }
+    });
+});

@@ -3,22 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hakkımızda - ZZenith Zirve'26</title>
-    <meta name="description" content="Zenith Zirve'26 hakkında bilgi edinin. Türkiye'nin en büyük zirve etkinliği.">
+    <title>Hakkımızda | Zenith Zirve'26</title>
+    <meta name="description" content="Zenith Zirve'26'nın vizyonu, misyonu ve değerleri. Gençlerin potansiyelini ortaya çıkaran ulusal gençlik platformu hakkında bilgi edinin.">
+    <meta name="author" content="Zenith Zirve">
+    <meta name="theme-color" content="#1e3a8a">
+    <link rel="canonical" href="https://01gokturk552.github.io/zenithzirve/hakkimizda.html">
+
+    <!-- Open Graph / Sosyal Medya -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Zenith Zirve'26">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:title" content="Hakkımızda | Zenith Zirve'26">
+    <meta property="og:description" content="Zenith Zirve'26'nın vizyonu, misyonu ve değerleri. Gençlerin potansiyelini ortaya çıkaran ulusal gençlik platformu.">
+    <meta property="og:url" content="https://01gokturk552.github.io/zenithzirve/hakkimizda.html">
+    <meta property="og:image" content="https://01gokturk552.github.io/zenithzirve/zenithzirve.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hakkımızda | Zenith Zirve'26">
+    <meta name="twitter:description" content="Zenith Zirve'26'nın vizyonu, misyonu ve değerleri.">
+    <meta name="twitter:image" content="https://01gokturk552.github.io/zenithzirve/zenithzirve.png">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="zenithzirve.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <a class="skip-link" href="#main">İçeriğe geç</a>
     <!-- Navigasyon -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Ana navigasyon">
         <div class="container">
             <div class="nav-brand">
                 <a href="index.html">Zenith Zirve'26</a>
             </div>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">Ana Sayfa</a></li>
                 <li><a href="hakkimizda.html" class="active">Hakkımızda</a></li>
                 <li><a href="ekibimiz.html">Ekibimiz</a></li>
@@ -27,14 +46,15 @@
                 <li><a href="iletisim.html">İletişim</a></li>
                 <li><a href="basvuru.html" class="btn-nav">Başvuru</a></li>
             </ul>
-            <div class="hamburger">
+            <button class="hamburger" type="button" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
+    <main id="main">
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
@@ -157,6 +177,7 @@
             <a href="basvuru.html" class="btn btn-primary btn-large">Hemen Başvur</a>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">

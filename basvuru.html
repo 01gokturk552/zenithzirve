@@ -3,22 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Başvuru - Zenith Zirve'26</title>
-    <meta name="description" content="Zenith Zirve 2026'ya başvurun. Türkiye'nin en büyük zirve etkinliğine katılın.">
+    <title>Başvuru | Zenith Zirve'26</title>
+    <meta name="description" content="Zenith Zirve'26'ya başvurun. 27-28 Haziran 2026 tarihlerinde gerçekleşecek ulusal gençlik zirvesinde yerinizi ayırtın.">
+    <meta name="author" content="Zenith Zirve">
+    <meta name="theme-color" content="#1e3a8a">
+    <link rel="canonical" href="https://01gokturk552.github.io/zenithzirve/basvuru.html">
+
+    <!-- Open Graph / Sosyal Medya -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Zenith Zirve'26">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:title" content="Başvuru | Zenith Zirve'26">
+    <meta property="og:description" content="27-28 Haziran 2026 tarihlerinde gerçekleşecek ulusal gençlik zirvesinde yerinizi ayırtın.">
+    <meta property="og:url" content="https://01gokturk552.github.io/zenithzirve/basvuru.html">
+    <meta property="og:image" content="https://01gokturk552.github.io/zenithzirve/zenithzirve.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Başvuru | Zenith Zirve'26">
+    <meta name="twitter:description" content="Zenith Zirve'26'ya başvurun ve yerinizi ayırtın.">
+    <meta name="twitter:image" content="https://01gokturk552.github.io/zenithzirve/zenithzirve.png">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="zenithzirve.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <a class="skip-link" href="#main">İçeriğe geç</a>
     <!-- Navigasyon -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Ana navigasyon">
         <div class="container">
             <div class="nav-brand">
                 <a href="index.html">Zenith Zirve'26</a>
             </div>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">Ana Sayfa</a></li>
                 <li><a href="hakkimizda.html">Hakkımızda</a></li>
                 <li><a href="ekibimiz.html">Ekibimiz</a></li>
@@ -27,14 +46,15 @@
                 <li><a href="iletisim.html">İletişim</a></li>
                 <li><a href="basvuru.html" class="btn-nav">Başvuru</a></li>
             </ul>
-            <div class="hamburger">
+            <button class="hamburger" type="button" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
+    <main id="main">
     <!-- Page Header -->
     <section class="page-header">
         <div class="container">
@@ -51,12 +71,13 @@
                     <h2>Başvuru Formu</h2>
                     <p class="form-description">Zenith Zirve 2026'ya başvurmak için aşağıdaki formu doldurun.</p>
                     <div class="form-embed">
-                        <iframe 
-                            src="https://docs.google.com/forms/d/e/1FAIpQLSd7YixJOhh9r6LOO_IEQQcuHFHZbSugm5MYGgUiO9AQPXHugA/viewform?usp=dialog" 
-                            width="100%" 
-                            height="800" 
-                            style="border:0; border-radius: 16px;" 
-                            allowfullscreen="" 
+                        <iframe
+                            title="Zenith Zirve'26 başvuru formu"
+                            src="https://docs.google.com/forms/d/e/1FAIpQLSd7YixJOhh9r6LOO_IEQQcuHFHZbSugm5MYGgUiO9AQPXHugA/viewform?usp=dialog"
+                            width="100%"
+                            height="800"
+                            style="border:0; border-radius: 16px;"
+                            allowfullscreen=""
                             loading="lazy">
                         </iframe>
                     </div>
@@ -64,13 +85,14 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h3>Zenith Zirve</h3>
+                    <h3>Zenith Zirve'26</h3>
                     <p>Türkiye'nin dört bir yanından gençleri bir araya getirerek fikir üreten, tartışan ve geleceği şekillendiren bir ulusal gençlik platformuyuz.</p>
                 </div>
                 <div class="footer-section">

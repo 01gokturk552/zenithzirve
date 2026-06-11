@@ -5,6 +5,55 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Klavye ile gezinme için odak göstergesi */
+:focus-visible {
+    outline: 3px solid var(--secondary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* İçeriğe atla bağlantısı (ekran okuyucu / klavye erişilebilirliği) */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    z-index: 2000;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    padding: 0.75rem 1.25rem;
+    border-radius: 0 0 8px 0;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.skip-link:focus {
+    left: 0;
+}
+
+/* Hareket azaltma tercihi olan kullanıcılar için animasyonları kapat */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
 :root {
     --background: #ffffff;
     --foreground: #1e3a8a;
@@ -41,11 +90,19 @@ body {
     line-height: 1.6;
     color: var(--foreground);
     background-color: var(--background);
-    background-image: radial-gradient(circle at 20% 10%, rgba(30, 58, 138, 0.05) 0%, transparent 40%),
-                      radial-gradient(circle at 80% 60%, rgba(59, 130, 246, 0.05) 0%, transparent 45%);
-    background-attachment: fixed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* Sabit, jank yaratmayan arka plan ışıltısı */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: radial-gradient(circle at 20% 10%, rgba(30, 58, 138, 0.05) 0%, transparent 40%),
+                      radial-gradient(circle at 80% 60%, rgba(59, 130, 246, 0.05) 0%, transparent 45%);
 }
 
 .container {
@@ -56,16 +113,22 @@ body {
 
 /* Navigasyon */
 .navbar {
-    background-color: var(--glass-bg);
+    background: var(--glass-bg);
     backdrop-filter: blur(14px) saturate(140%);
     -webkit-backdrop-filter: blur(14px) saturate(140%);
-    border: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
     box-shadow: var(--shadow-card);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(248, 250, 252, 0.88));
+    box-shadow: 0 8px 30px -12px rgba(30, 58, 138, 0.25);
 }
 
 .navbar .container {
@@ -97,6 +160,29 @@ body {
     transition: color 0.3s;
 }
 
+.nav-menu a:not(.btn-nav) {
+    position: relative;
+}
+
+.nav-menu a:not(.btn-nav)::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 2px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.nav-menu a:not(.btn-nav):hover::after,
+.nav-menu a:not(.btn-nav).active::after {
+    transform: scaleX(1);
+}
+
 .nav-menu a:hover,
 .nav-menu a.active {
     color: var(--primary);
@@ -122,13 +208,30 @@ body {
     flex-direction: column;
     cursor: pointer;
     gap: 4px;
+    background: none;
+    border: none;
+    padding: 4px;
 }
 
 .hamburger span {
+    display: block;
     width: 25px;
     height: 3px;
+    border-radius: 2px;
     background-color: var(--foreground);
-    transition: 0.3s;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* Hero Section */
@@ -523,12 +626,12 @@ body {
     width: 100%;
     max-width: 400px;
     height: 400px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--navy-2) 100%);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-card);
 }
 
 .placeholder-content {
@@ -545,7 +648,7 @@ body {
 .placeholder-content p {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--navy-1);
+    color: #ffffff;
 }
 
 /* Values Grid */
@@ -663,7 +766,7 @@ body {
 .image-placeholder-circle {
     width: 200px;
     height: 200px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--navy-2) 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -937,7 +1040,7 @@ body {
 
 .keynote-info .keynote-badge {
     display: inline-block;
-    background: var(--accent-color);
+    background: var(--accent);
     color: white;
     padding: 0.5rem 1rem;
     border-radius: 20px;
@@ -1213,7 +1316,7 @@ body {
 .footer-bottom {
     text-align: center;
     padding-top: 2rem;
-    border-top: 1px solid hsl(var(--border) / .5);
+    border-top: 1px solid rgba(255, 255, 255, 0.18);
     opacity: 0.8;
 }
 
@@ -1290,6 +1393,26 @@ body {
     .program-time {
         min-width: auto;
     }
+
+    .goals-list {
+        grid-template-columns: 1fr;
+    }
+
+    .goal-item:nth-child(5) {
+        max-width: none;
+    }
+
+    .hero {
+        padding: 150px 0 90px;
+    }
+
+    .page-header h1 {
+        font-size: 2.25rem;
+    }
+
+    .modal-content {
+        padding: 1.75rem;
+    }
 }
 
 /* Modal Stilleri */
@@ -1308,12 +1431,14 @@ body {
 
 .modal-content {
     background-color: var(--card);
-    margin: 15% auto;
+    margin: 6vh auto;
     padding: 2.5rem;
     border: 1px solid var(--border);
     border-radius: var(--radius);
     width: 90%;
-    max-width: 600px;
+    max-width: 640px;
+    max-height: 88vh;
+    overflow-y: auto;
     box-shadow: var(--shadow-card);
     position: relative;
     animation: modalFadeIn 0.3s ease;
@@ -1334,8 +1459,12 @@ body {
     color: var(--muted-foreground);
     float: right;
     font-size: 28px;
+    line-height: 1;
     font-weight: bold;
     cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0 0 0 1rem;
     transition: color 0.3s ease;
 }
 

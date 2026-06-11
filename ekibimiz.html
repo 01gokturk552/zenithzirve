@@ -3,22 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ekibimiz - Zenith Zirve'26</title>
-    <meta name="description" content="Zenith Zirve ekibini tanıyın. Genç ve dinamik ekibimizle tanışın.">
+    <title>Ekibimiz | Zenith Zirve'26</title>
+    <meta name="description" content="Zenith Zirve'26'yı hayata geçiren genç ve dinamik ekibimizle tanışın. Koordinatörler, danışmanlar ve tüm departman başkanları.">
+    <meta name="author" content="Zenith Zirve">
+    <meta name="theme-color" content="#1e3a8a">
+    <link rel="canonical" href="https://01gokturk552.github.io/zenithzirve/ekibimiz.html">
+
+    <!-- Open Graph / Sosyal Medya -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Zenith Zirve'26">
+    <meta property="og:locale" content="tr_TR">
+    <meta property="og:title" content="Ekibimiz | Zenith Zirve'26">
+    <meta property="og:description" content="Zenith Zirve'26'yı hayata geçiren genç ve dinamik ekibimizle tanışın.">
+    <meta property="og:url" content="https://01gokturk552.github.io/zenithzirve/ekibimiz.html">
+    <meta property="og:image" content="https://01gokturk552.github.io/zenithzirve/zenithzirve.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ekibimiz | Zenith Zirve'26">
+    <meta name="twitter:description" content="Zenith Zirve'26'yı hayata geçiren genç ve dinamik ekibimizle tanışın.">
+    <meta name="twitter:image" content="https://01gokturk552.github.io/zenithzirve/zenithzirve.png">
+
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="zenithzirve.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <a class="skip-link" href="#main">İçeriğe geç</a>
     <!-- Navigasyon -->
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Ana navigasyon">
         <div class="container">
             <div class="nav-brand">
                 <a href="index.html">Zenith Zirve'26</a>
             </div>
-            <ul class="nav-menu">
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">Ana Sayfa</a></li>
                 <li><a href="hakkimizda.html">Hakkımızda</a></li>
                 <li><a href="ekibimiz.html" class="active">Ekibimiz</a></li>
@@ -27,14 +46,15 @@
                 <li><a href="iletisim.html">İletişim</a></li>
                 <li><a href="basvuru.html" class="btn-nav">Başvuru</a></li>
             </ul>
-            <div class="hamburger">
+            <button class="hamburger" type="button" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="navMenu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
+    <main id="main">
     <!-- Departmanlar -->
     <section class="section">
         <div class="container">
@@ -49,14 +69,14 @@
                 <div class="team-grid">
                     <div class="team-card" onclick="showMessage('yigit')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/yiğitefesevir.png" alt="Yiğit Efe Sevir" class="team-photo">
+                            <img src="ekibimiz/yiğitefesevir.png" alt="Yiğit Efe Sevir" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Yiğit Efe Sevir</h4>
                         <p class="team-role">Genel Koordinatör</p>
                     </div>
                     <div class="team-card" onclick="showMessage('ada')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/adanehirşahin.png" alt="Ada Nehir Şahin" class="team-photo">
+                            <img src="ekibimiz/adanehirşahin.png" alt="Ada Nehir Şahin" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Ada Nehir Şahin</h4>
                         <p class="team-role">Genel Koordinatör</p>
@@ -70,21 +90,21 @@
                 <div class="team-grid">
                     <div class="team-card" onclick="showMessage('muhammed')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/muhammedömerbozkuş.png" alt="Muhammed Ömer Bozkuş" class="team-photo">
+                            <img src="ekibimiz/muhammedömerbozkuş.png" alt="Muhammed Ömer Bozkuş" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Muhammed Ömer Bozkuş</h4>
                         <p class="team-role">Genel Danışman</p>
                     </div>
                     <div class="team-card" onclick="showMessage('hanife')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/hanifeezgigören.png" alt="Hanife Ezgi Gören" class="team-photo">
+                            <img src="ekibimiz/hanifeezgigören.png" alt="Hanife Ezgi Gören" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Hanife Ezgi Gören</h4>
                         <p class="team-role">Genel Danışman</p>
                     </div>
                     <div class="team-card" onclick="showMessage('emir')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/emirkızıltuğ.png" alt="Emir Kızıltuğ" class="team-photo">
+                            <img src="ekibimiz/emirkızıltuğ.png" alt="Emir Kızıltuğ" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Emir Kızıltuğ</h4>
                         <p class="team-role">Genel Danışman</p>
@@ -98,14 +118,14 @@
                 <div class="team-grid">
                     <div class="team-card" onclick="showMessage('asude')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/asudebaran.png" alt="Asude Baran" class="team-photo">
+                            <img src="ekibimiz/asudebaran.png" alt="Asude Baran" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Asude Baran</h4>
                         <p class="team-role">Organizasyon Başkanı</p>
                     </div>
                     <div class="team-card" onclick="showMessage('kerem')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/keremaytekin.png" alt="Kerem Aytekin" class="team-photo">
+                            <img src="ekibimiz/keremaytekin.png" alt="Kerem Aytekin" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Kerem Aytekin</h4>
                         <p class="team-role">Organizasyon Başkanı</p>
@@ -119,21 +139,21 @@
                 <div class="team-grid">
                     <div class="team-card" onclick="showMessage('elif')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/elifkaplan.png" alt="Elif Kaplan" class="team-photo">
+                            <img src="ekibimiz/elifkaplan.png" alt="Elif Kaplan" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Elif Kaplan</h4>
                         <p class="team-role">Halkla İlişkiler Başkanı</p>
                     </div>
                     <div class="team-card" onclick="showMessage('cemre')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/cemreseçkin.png" alt="Cemre Seçkin" class="team-photo">
+                            <img src="ekibimiz/cemreseçkin.png" alt="Cemre Seçkin" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Cemre Seçkin</h4>
                         <p class="team-role">Halkla İlişkiler Başkanı</p>
                     </div>
                     <div class="team-card" onclick="showMessage('asli')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/aslınursubaşı.png" alt="Aslı Subaşı" class="team-photo">
+                            <img src="ekibimiz/aslınursubaşı.png" alt="Aslı Subaşı" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Aslınur Subaşı</h4>
                         <p class="team-role">Halkla İlişkiler Başkanı</p>
@@ -147,14 +167,14 @@
                 <div class="team-grid">
                     <div class="team-card" onclick="showMessage('abdulkadir')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/abdulkadirözyapıcı.png" alt="Abdulkadir Özyapıcı" class="team-photo">
+                            <img src="ekibimiz/abdulkadirözyapıcı.png" alt="Abdulkadir Özyapıcı" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Abdulkadir Özyapıcı</h4>
                         <p class="team-role">Saha ve Güvenlik Başkanı</p>
                     </div>
                     <div class="team-card" onclick="showMessage('deniz')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/denizelma.png" alt="Deniz Elma" class="team-photo">
+                            <img src="ekibimiz/denizelma.png" alt="Deniz Elma" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Deniz Elma</h4>
                         <p class="team-role">Saha ve Güvenlik Başkanı</p>
@@ -168,14 +188,14 @@
                 <div class="team-grid">
                     <div class="team-card" onclick="showMessage('ebrar')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/ebraraygün.png" alt="Ebrar Aygün" class="team-photo">
+                            <img src="ekibimiz/ebraraygün.png" alt="Ebrar Aygün" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Ebrar Aygün</h4>
                         <p class="team-role">Kreatif Başkanı</p>
                     </div>
                     <div class="team-card" onclick="showMessage('akif')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/akifefealtunsoy.png" alt="Akif Efe Altunsoy" class="team-photo">
+                            <img src="ekibimiz/akifefealtunsoy.png" alt="Akif Efe Altunsoy" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Akif Efe Altunsoy</h4>
                         <p class="team-role">Kreatif Başkanı</p>
@@ -189,14 +209,14 @@
                 <div class="team-grid">
                     <div class="team-card" onclick="showMessage('nihal')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/nihalbayrak.png" alt="Nihal Bayrak" class="team-photo">
+                            <img src="ekibimiz/nihalbayrak.png" alt="Nihal Bayrak" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Nihal Bayrak</h4>
                         <p class="team-role">Basın Başkanı</p>
                     </div>
                     <div class="team-card" onclick="showMessage('omer')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/ömerkamilokutan.png" alt="Ömer Kamil Okutan" class="team-photo">
+                            <img src="ekibimiz/ömerkamilokutan.png" alt="Ömer Kamil Okutan" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Ömer Kamil Okutan</h4>
                         <p class="team-role">Basın Başkanı</p>
@@ -210,7 +230,7 @@
                 <div class="team-grid">
                     <div class="team-card" onclick="showMessage('meyra')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/meyrapaçali.png" alt="Meyra Paçali" class="team-photo">
+                            <img src="ekibimiz/meyrapaçali.png" alt="Meyra Paçali" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Meyra Paçali</h4>
                         <p class="team-role">Finans Başkanı</p>
@@ -224,14 +244,14 @@
                 <div class="team-grid">
                     <div class="team-card" onclick="showMessage('omur')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/ömüraydın.png" alt="Ömür Aydın" class="team-photo">
+                            <img src="ekibimiz/ömüraydın.png" alt="Ömür Aydın" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Ömür Aydın</h4>
                         <p class="team-role">İnsan Kaynakları Başkanı</p>
                     </div>
                     <div class="team-card" onclick="showMessage('eylul')">
                         <div class="team-avatar">
-                            <img src="ekibimiz/eylülşahin.png" alt="Eylül Şahin" class="team-photo">
+                            <img src="ekibimiz/eylülşahin.png" alt="Eylül Şahin" class="team-photo" width="120" height="120" loading="lazy" decoding="async">
                         </div>
                         <h4>Eylül Şahin</h4>
                         <p class="team-role">İnsan Kaynakları Başkanı</p>
@@ -249,11 +269,12 @@
             <a href="mailto:zenithzirve@gmail.com" class="btn btn-primary btn-large">İletişime Geç</a>
         </div>
     </section>
+    </main>
 
     <!-- Modal -->
-    <div id="messageModal" class="modal">
+    <div id="messageModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalName" aria-hidden="true">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <button class="close" type="button" onclick="closeModal()" aria-label="Kapat">&times;</button>
             <h2 id="modalName"></h2>
             <p id="modalRole"></p>
             <p id="modalMessage"></p>
