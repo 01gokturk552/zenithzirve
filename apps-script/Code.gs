@@ -180,11 +180,13 @@ function setApplicationStatus(rowNum, status) {
   sheet.getRange(rowNum, statusCol + 1).setValue(status);
 
   var emailed = false, emailTo = "";
-  if (status === "Onaylandı") {
+  if (status === "Onaylandı" || status === "Tekrar İstendi") {
     var rowVals = sheet.getRange(rowNum, 1, 1, sheet.getLastColumn()).getValues()[0];
     emailTo = findEmail(headers, rowVals);
     if (emailTo) {
-      sendApprovalEmail(emailTo, findName(headers, rowVals));
+      var nm = findName(headers, rowVals);
+      if (status === "Onaylandı") sendApprovalEmail(emailTo, nm);
+      else sendResendEmail(emailTo, nm);
       emailed = true;
     }
   }
@@ -255,20 +257,44 @@ function sendApprovalEmail(to, name) {
         "Ömür Tanem Aydın / +90 533 669 00 86</p>" +
     "</div>";
 
-  var options = { htmlBody: htmlBody, name: SENDER_NAME };
-  // zenithzirve@gmail.com doğrulanmış bir alias ise o adresten gönder; değilse yanıt adresi yap
+  MailApp.sendEmail(to, subject, body, senderOptions(htmlBody));
+}
+
+// Gönderen ayarları: zenithzirve@gmail.com doğrulanmış alias ise ondan gönder,
+// değilse gönderen adını ayarla + yanıt adresini zenithzirve yap.
+function senderOptions(htmlBody) {
+  var options = { name: SENDER_NAME };
+  if (htmlBody) options.htmlBody = htmlBody;
   try {
     var aliases = GmailApp.getAliases();
-    if (aliases && aliases.indexOf(SENDER_EMAIL) !== -1) {
-      options.from = SENDER_EMAIL;
-    } else {
-      options.replyTo = SENDER_EMAIL;
-    }
+    if (aliases && aliases.indexOf(SENDER_EMAIL) !== -1) options.from = SENDER_EMAIL;
+    else options.replyTo = SENDER_EMAIL;
   } catch (e) {
     options.replyTo = SENDER_EMAIL;
   }
+  return options;
+}
 
-  MailApp.sendEmail(to, subject, body, options);
+// "Tekrar iste" — başvuru sahibinden bilgilerini yeniden göndermesini isteyen e-posta.
+function sendResendEmail(to, name) {
+  var greeting = name ? ("Sayın " + name + ",") : "Sayın Katılımcımız,";
+  var subject = "Zenith Zirve'26 — Başvurunuz Hakkında";
+  var body =
+    greeting + "\n\n" +
+    "Zenith Zirve'26 başvurunuzu aldık; ancak başvurunuzun değerlendirilebilmesi için bazı bilgilerin güncellenmesi / yeniden iletilmesi gerekmektedir.\n\n" +
+    "Lütfen başvurunuzu eksiksiz şekilde tekrar gönderiniz. Sorularınız için bu e-postayı yanıtlayabilirsiniz.\n\n" +
+    "Anlayışınız için teşekkür eder, sizi aramızda görmeyi dileriz.\n\n" +
+    "Saygılarımızla,\n" +
+    "Zenith Zirve'26 İnsan Kaynakları";
+  var htmlBody =
+    "<div style=\"font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#1e293b;line-height:1.7;max-width:560px\">" +
+      "<p>" + greeting + "</p>" +
+      "<p>Zenith Zirve'26 başvurunuzu aldık; ancak başvurunuzun değerlendirilebilmesi için bazı bilgilerin <strong>güncellenmesi / yeniden iletilmesi</strong> gerekmektedir.</p>" +
+      "<p>Lütfen başvurunuzu eksiksiz şekilde tekrar gönderiniz. Sorularınız için bu e-postayı yanıtlayabilirsiniz.</p>" +
+      "<p>Anlayışınız için teşekkür eder, sizi aramızda görmeyi dileriz.</p>" +
+      "<p>Saygılarımızla,<br><strong>Zenith Zirve'26 İnsan Kaynakları</strong></p>" +
+    "</div>";
+  MailApp.sendEmail(to, subject, body, senderOptions(htmlBody));
 }
 
 function findResponsesSheet() {

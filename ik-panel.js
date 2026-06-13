@@ -1,6 +1,7 @@
 /*
  * Zenith Zirve'26 — İK paneli (başvurular)
- * Google Form yanıtlarını tablo halinde gösterir.
+ * Liste görünümü (Delege / Delegasyon bölümleri), satır → detay modalı,
+ * Onayla / Reddet / Tekrar iste aksiyonları.
  */
 (function () {
     "use strict";
@@ -8,29 +9,28 @@
     var $ = Z.$, elem = Z.elem;
     var CFG = window.ZENITH_CONFIG || {};
 
-    // Yetki kontrolü — giriş yoksa login sayfasına gönder
+    // Yetki kontrolü
     if (!Z.Auth.isAuthed("ik")) { location.replace("ik-login.html"); return; }
 
-    var headers = [];
-    var rows = [];
-    var rowMeta = [];       // rows ile paralel: { row: <sayfa satır no>, status: <durum> }
-    var typeColIndex = -1;
-    var viewMode = "cards"; // "cards" | "table"
+    var headers = [], rows = [], rowMeta = [];
+    var typeColIndex = -1, tsIdx = -1;
+    var nameIdxs = [], phoneIdxs = [], emailIdxs = [];
+    var viewMode = "list"; // "list" | "table"
+    var detailModal = null;
 
-    $("#logoutBtn").addEventListener("click", function () {
-        Z.Auth.logout();
-        location.replace("ik-login.html");
-    });
+    // ---------- Listeyiciler ----------
+    $("#logoutBtn").addEventListener("click", function () { Z.Auth.logout(); location.replace("ik-login.html"); });
     $("#refreshBtn").addEventListener("click", load);
     $("#search").addEventListener("input", render);
     $("#typeFilter").addEventListener("change", render);
-    $("#csvBtn").addEventListener("click", downloadCsv);
     $("#statusFilter").addEventListener("change", render);
+    $("#csvBtn").addEventListener("click", downloadCsv);
     $("#viewToggle").addEventListener("click", function () {
-        viewMode = viewMode === "cards" ? "table" : "cards";
-        this.textContent = viewMode === "cards" ? "Tablo görünümü" : "Kart görünümü";
+        viewMode = viewMode === "list" ? "table" : "list";
+        this.textContent = viewMode === "list" ? "Tablo görünümü" : "Liste görünümü";
         render();
     });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeDetail(); });
 
     function init() {
         if (!Z.hasApi()) {
@@ -41,6 +41,7 @@
         load();
     }
 
+    // ---------- Veri ----------
     function load() {
         var host = $("#tableHost");
         host.innerHTML = "<div class='empty-state'><span class='ico'>⏳</span>Başvurular yükleniyor…</div>";
@@ -48,16 +49,9 @@
             headers = res.headers || [];
             rows = res.rows || [];
             rowMeta = res.rowMeta || [];
-            typeColIndex = -1;
-            var typeCol = (CFG.applicationTypeColumn || "").toLowerCase().trim();
-            if (typeCol) {
-                headers.forEach(function (h, i) {
-                    if (String(h).toLowerCase().trim() === typeCol) typeColIndex = i;
-                });
-            }
+            detectColumns();
             buildTypeFilter();
             render();
-
             if (res.local) {
                 $("#tableHost").innerHTML = "";
                 $("#tableHost").appendChild(elem("div", { class: "empty-state", html:
@@ -68,6 +62,24 @@
             $("#tableHost").innerHTML = "";
             Z.showStatus($("#globalStatus"), "err", "Başvurular alınamadı: " + err.message);
         });
+    }
+
+    function detectColumns() {
+        var tsRe = /(zaman ?damgas|timestamp|tarih)/i;
+        var nameRe = /(ad[ıi].{0,8}soyad|isim|adınız|^ad$|full ?name|\bname\b)/i;
+        var phoneRe = /(telefon|phone|numara|gsm|\bcep\b)/i;
+        var emailRe = /(mail|e-?posta)/i;
+        tsIdx = -1; nameIdxs = []; phoneIdxs = []; emailIdxs = [];
+        headers.forEach(function (h, i) {
+            var s = String(h);
+            if (tsIdx < 0 && tsRe.test(s)) tsIdx = i;
+            if (nameRe.test(s)) nameIdxs.push(i);
+            if (phoneRe.test(s)) phoneIdxs.push(i);
+            if (emailRe.test(s)) emailIdxs.push(i);
+        });
+        typeColIndex = -1;
+        var typeCol = (CFG.applicationTypeColumn || "").toLowerCase().trim();
+        if (typeCol) headers.forEach(function (h, i) { if (String(h).toLowerCase().trim() === typeCol) typeColIndex = i; });
     }
 
     function buildTypeFilter() {
@@ -84,12 +96,25 @@
         sel.hidden = opts.length === 0;
     }
 
+    // ---------- Yardımcılar ----------
+    function firstFilled(r, idxs) {
+        for (var k = 0; k < idxs.length; k++) {
+            var v = r[idxs[k]];
+            if (v != null && String(v).trim()) return String(v).trim();
+        }
+        return "";
+    }
     function statusOf(meta) {
         var s = meta && meta.status ? String(meta.status).trim() : "";
         return s || "Beklemede";
     }
+    function statusClass(s) {
+        if (s === "Onaylandı") return "ok";
+        if (s === "Reddedildi") return "rejected";
+        if (s === "Tekrar İstendi") return "resend";
+        return "pending";
+    }
 
-    // Filtrelenmiş başvurular: [{ r: <satır dizisi>, meta: {row,status} }]
     function currentFiltered() {
         var q = $("#search").value.toLowerCase().trim();
         var type = $("#typeFilter").value;
@@ -113,132 +138,162 @@
             $("#count").textContent = "";
             return;
         }
-
         var data = currentFiltered();
         $("#count").textContent = data.length + " / " + rows.length + " başvuru";
-
         host.innerHTML = "";
-        host.appendChild(viewMode === "table" ? buildTable(data) : buildCards(data));
-
+        host.appendChild(viewMode === "table" ? buildTable(data) : buildList(data));
         if (!data.length) {
             host.appendChild(elem("div", { class: "empty-state", html: "<span class='ico'>🔍</span>Filtreye uyan başvuru yok." }));
         }
     }
 
-    function detectIdx(re) {
-        for (var i = 0; i < headers.length; i++) { if (re.test(String(headers[i]))) return i; }
-        return -1;
-    }
-
-    // Okunması kolay kart görünümü: her başvuru = bir kart, alanlar "Soru → Cevap"
-    function buildCards(data) {
-        var tsRe = /(zaman ?damgas|timestamp|tarih)/i;
-        var nameRe = /(ad[ıi].{0,8}soyad|isim|adınız|^ad$|full ?name|\bname\b)/i;
-        var tsIdx = detectIdx(tsRe);
-        // İsim olabilecek tüm sütunlar (delegasyon + bireysel için ayrı olabilir)
-        var nameIdxs = [];
-        headers.forEach(function (h, i) { if (nameRe.test(String(h))) nameIdxs.push(i); });
-
-        var grid = elem("div", { class: "app-cards" });
+    // ---------- Liste görünümü ----------
+    function buildList(data) {
+        var groups = {}, order = [];
         data.forEach(function (item) {
-            var r = item.r, meta = item.meta;
-            // Bu satır için ad: ilk dolu isim sütunu
-            var titleIdx = -1;
-            for (var k = 0; k < nameIdxs.length; k++) {
-                if (r[nameIdxs[k]] != null && String(r[nameIdxs[k]]).trim()) { titleIdx = nameIdxs[k]; break; }
-            }
-            var titleVal = titleIdx >= 0 ? String(r[titleIdx]) : "İsimsiz başvuru";
-
-            var headChildren = [elem("h4", { class: "app-name", text: titleVal })];
-            if (typeColIndex >= 0 && r[typeColIndex]) {
-                headChildren.push(elem("span", { class: "app-type", text: String(r[typeColIndex]) }));
-            }
-
-            var fields = elem("div", { class: "app-fields" });
-            headers.forEach(function (h, ci) {
-                if (ci === titleIdx || ci === tsIdx || ci === typeColIndex) return;
-                var v = r[ci];
-                if (v == null || String(v).trim() === "") return;
-                fields.appendChild(fieldRow(String(h), String(v)));
-            });
-
-            var card = elem("div", { class: "app-card" }, [elem("div", { class: "app-card-head" }, headChildren)]);
-            if (tsIdx >= 0 && r[tsIdx]) card.appendChild(elem("div", { class: "app-meta", text: String(r[tsIdx]) }));
-            card.appendChild(actionRow(meta));
-            card.appendChild(fields);
-            grid.appendChild(card);
+            var key = typeColIndex >= 0 ? ((item.r[typeColIndex] || "").trim() || "Diğer") : "Tüm Başvurular";
+            if (!groups[key]) { groups[key] = []; order.push(key); }
+            groups[key].push(item);
         });
-        return grid;
+        order.sort(function (a, b) {
+            var rank = function (x) {
+                if (/delegasyon/i.test(x)) return 1;
+                if (/delege/i.test(x)) return 0;
+                return 2;
+            };
+            var ra = rank(a), rb = rank(b);
+            return ra !== rb ? ra - rb : a.localeCompare(b, "tr");
+        });
+
+        var wrap = elem("div", { class: "app-list" });
+        order.forEach(function (key) {
+            var items = groups[key];
+            wrap.appendChild(elem("div", { class: "app-section-head" }, [
+                elem("span", { class: "sec-title", text: key }),
+                elem("span", { class: "sec-count", text: items.length + " başvuru" })
+            ]));
+            var list = elem("div", { class: "app-rows" });
+            items.forEach(function (item) { list.appendChild(buildRow(item)); });
+            wrap.appendChild(list);
+        });
+        return wrap;
     }
 
-    // Durum rozeti + Onayla / Reddet butonları
-    function actionRow(meta) {
-        var cur = statusOf(meta);
-        var pill = elem("span", { class: "status-pill " + statusClass(cur), text: cur });
-        var approve = elem("button", { class: "pbtn pbtn-ok pbtn-sm", type: "button" }, ["✓ Onayla"]);
-        var reject = elem("button", { class: "pbtn pbtn-danger pbtn-sm", type: "button" }, ["✕ Reddet"]);
+    function buildRow(item) {
+        var r = item.r, meta = item.meta, st = statusOf(meta);
+        var name = firstFilled(r, nameIdxs) || "İsimsiz başvuru";
+        var phone = firstFilled(r, phoneIdxs);
+        var email = firstFilled(r, emailIdxs);
+        var sub = [];
+        if (phone) sub.push("📞 " + phone);
+        if (email) sub.push("✉ " + email);
 
-        approve.addEventListener("click", function () { doSetStatus(meta, "Onaylandı", pill, [approve, reject]); });
-        reject.addEventListener("click", function () { doSetStatus(meta, "Reddedildi", pill, [approve, reject]); });
+        var main = elem("button", { class: "app-row-main", type: "button", title: "Detayları gör" }, [
+            elem("span", { class: "app-row-name", text: name }),
+            elem("span", { class: "app-row-sub", text: sub.join("    ·    ") || "Detaylar için tıklayın" })
+        ]);
+        main.addEventListener("click", function () { openDetail(item); });
 
-        return elem("div", { class: "app-actions" }, [pill, elem("span", { class: "spacer" }), approve, reject]);
+        var actions = elem("div", { class: "app-row-actions" }, [
+            elem("span", { class: "status-pill " + statusClass(st), text: st })
+        ]);
+        if (st === "Beklemede") {
+            actions.appendChild(actBtn("✓ Onayla", "pbtn-ok", function () { doSetStatus(item, "Onaylandı"); }));
+            actions.appendChild(actBtn("✕ Reddet", "pbtn-danger", function () { doSetStatus(item, "Reddedildi"); }));
+            actions.appendChild(actBtn("↻ Tekrar iste", "pbtn-ghost", function () { doSetStatus(item, "Tekrar İstendi"); }));
+        } else {
+            actions.appendChild(actBtn("↻ Tekrar iste", "pbtn-ghost", function () { doSetStatus(item, "Tekrar İstendi"); }));
+            actions.appendChild(actBtn("Geri al", "pbtn-ghost", function () { doSetStatus(item, ""); }));
+        }
+        return elem("div", { class: "app-row" }, [main, actions]);
     }
 
-    function statusClass(s) {
-        if (s === "Onaylandı") return "ok";
-        if (s === "Reddedildi") return "rejected";
-        return "pending";
+    function actBtn(label, cls, fn) {
+        var b = elem("button", { class: "pbtn pbtn-sm " + cls, type: "button" }, [label]);
+        b.addEventListener("click", function (e) { e.stopPropagation(); fn(); });
+        return b;
     }
 
-    function doSetStatus(meta, status, pill, btns) {
-        var msg = status === "Onaylandı"
-            ? "Bu başvuru ONAYLANACAK ve başvuru sahibine e-posta gönderilecek. Emin misiniz?"
-            : "Bu başvuru REDDEDİLECEK. Emin misiniz?";
-        if (!confirm(msg)) return;
+    function doSetStatus(item, status) {
+        var msgs = {
+            "Onaylandı": "Bu başvuru ONAYLANACAK ve başvuru sahibine onay e-postası gönderilecek. Emin misiniz?",
+            "Reddedildi": "Bu başvuru REDDEDİLECEK. Emin misiniz?",
+            "Tekrar İstendi": "Başvuru sahibinden bilgilerini/başvurusunu TEKRAR göndermesi e-posta ile istenecek. Emin misiniz?",
+            "": "Bu başvurunun durumu 'Beklemede'ye alınsın mı?"
+        };
+        if (!confirm(msgs[status] != null ? msgs[status] : "Emin misiniz?")) return;
 
-        btns.forEach(function (b) { b.disabled = true; });
-        Z.Data.setStatus(meta.row, status).then(function (res) {
-            btns.forEach(function (b) { b.disabled = false; });
-            meta.status = status;
-            pill.textContent = status;
-            pill.className = "status-pill " + statusClass(status);
-            var note = "Durum: " + status;
-            if (status === "Onaylandı") {
-                note += res.emailed ? (" · E-posta gönderildi (" + res.emailTo + ")")
-                                    : " · ⚠ E-posta adresi bulunamadı, mail gönderilemedi";
-            }
+        Z.Data.setStatus(item.meta.row, status).then(function (res) {
+            item.meta.status = status;
+            var note = "Durum: " + (status || "Beklemede");
+            if (res.emailed) note += " · E-posta gönderildi (" + res.emailTo + ")";
+            else if (status === "Onaylandı" || status === "Tekrar İstendi") note += " · ⚠ E-posta adresi bulunamadı, mail gönderilemedi";
             Z.showStatus($("#globalStatus"), "ok", note);
             setTimeout(function () { Z.hideStatus($("#globalStatus")); }, 6000);
+            render();
         }).catch(function (err) {
-            btns.forEach(function (b) { b.disabled = false; });
             Z.showStatus($("#globalStatus"), "err", "İşlem başarısız: " + err.message);
         });
     }
 
-    // Tek alan satırı; uzun başlık/cevapları kısaltır, "Tümünü gör" ile açar
-    function fieldRow(label, value) {
-        var shortLabel = label.length > 70 ? label.slice(0, 67) + "…" : label;
-        var lbl = elem("span", { class: "lbl", title: label, text: shortLabel });
-        var val = elem("span", { class: "val" });
-        var children = [lbl, val];
+    // ---------- Detay modalı ----------
+    function openDetail(item) {
+        if (!detailModal) detailModal = buildDetailModal();
+        var r = item.r, meta = item.meta, st = statusOf(meta);
+        $(".detail-title", detailModal).textContent = firstFilled(r, nameIdxs) || "İsimsiz başvuru";
 
-        if (value.length > 220) {
-            var preview = value.slice(0, 220) + "…";
-            val.textContent = preview;
-            var expanded = false;
-            var more = elem("button", { type: "button", class: "val-more" }, ["Tümünü gör"]);
-            more.addEventListener("click", function () {
-                expanded = !expanded;
-                val.textContent = expanded ? value : preview;
-                more.textContent = expanded ? "Daha az göster" : "Tümünü gör";
-            });
-            children.push(more);
-        } else {
-            val.textContent = value;
-        }
-        return elem("div", { class: "app-field" }, children);
+        var typeEl = $(".detail-type", detailModal);
+        if (typeColIndex >= 0 && r[typeColIndex]) { typeEl.textContent = String(r[typeColIndex]); typeEl.hidden = false; }
+        else typeEl.hidden = true;
+
+        var pill = $(".detail-status", detailModal);
+        pill.textContent = st;
+        pill.className = "status-pill detail-status " + statusClass(st);
+
+        $(".detail-meta", detailModal).textContent = (tsIdx >= 0 && r[tsIdx]) ? ("Başvuru zamanı: " + String(r[tsIdx])) : "";
+
+        var body = $(".detail-fields", detailModal);
+        body.innerHTML = "";
+        headers.forEach(function (h, ci) {
+            if (ci === tsIdx) return;
+            var v = r[ci];
+            if (v == null || String(v).trim() === "") return;
+            body.appendChild(elem("div", { class: "app-field" }, [
+                elem("span", { class: "lbl", text: String(h) }),
+                elem("span", { class: "val", text: String(v) })
+            ]));
+        });
+
+        detailModal.classList.add("open");
+        document.body.style.overflow = "hidden";
+        var closeBtn = $(".detail-close", detailModal);
+        if (closeBtn) closeBtn.focus();
     }
 
+    function buildDetailModal() {
+        var overlay = elem("div", { class: "detail-modal", role: "dialog", "aria-modal": "true", "aria-label": "Başvuru detayı" });
+        overlay.innerHTML =
+            '<div class="detail-modal-card">' +
+                '<button type="button" class="detail-close" aria-label="Kapat">&times;</button>' +
+                '<div class="detail-head">' +
+                    '<h3 class="detail-title"></h3>' +
+                    '<span class="status-pill detail-status"></span>' +
+                    '<span class="app-type detail-type"></span>' +
+                '</div>' +
+                '<div class="detail-meta"></div>' +
+                '<div class="detail-fields app-fields"></div>' +
+            '</div>';
+        document.body.appendChild(overlay);
+        overlay.addEventListener("click", function (e) { if (e.target === overlay) closeDetail(); });
+        $(".detail-close", overlay).addEventListener("click", closeDetail);
+        return overlay;
+    }
+
+    function closeDetail() {
+        if (detailModal) { detailModal.classList.remove("open"); document.body.style.overflow = ""; }
+    }
+
+    // ---------- Tablo görünümü ----------
     function buildTable(data) {
         var thHeaders = headers.map(function (h) { return elem("th", { text: h }); });
         thHeaders.unshift(elem("th", { text: "Durum" }));
@@ -253,6 +308,7 @@
         return elem("div", { class: "table-wrap" }, [elem("table", { class: "data-table" }, [thead, tbody])]);
     }
 
+    // ---------- CSV ----------
     function downloadCsv() {
         if (!headers.length) return;
         var data = currentFiltered();
