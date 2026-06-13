@@ -103,6 +103,17 @@ Kodu (`Code.gs`) değiştirirseniz **Deploy → Manage deployments → (kalem) �
 >
 > E-posta metnini değiştirmek için `Code.gs` içindeki `sendApprovalEmail` fonksiyonunu düzenleyin.
 
+### Gönderen adresi (zenithzirve@gmail.com)
+
+E-posta, scripti **çalıştıran hesaptan** gönderilir. `zenithzirve@gmail.com` adresinden gönderilmesi için iki yol vardır:
+
+1. **Alias (önerilen, kolay):** Scripti çalıştıran Gmail hesabında (Deploy ekranındaki "Run as") `zenithzirve@gmail.com`'u **doğrulanmış gönderen** olarak ekleyin:
+   Gmail → **Ayarlar → Hesaplar ve İçe Aktarma → "Şununla e-posta gönder" → Başka bir e-posta adresi ekle** → `zenithzirve@gmail.com` → gelen doğrulama kodunu girin.
+   Kod, bu adresi alias olarak bulursa otomatik olarak ondan gönderir.
+2. **Hesabı değiştir:** Apps Script projesini doğrudan `zenithzirve@gmail.com` hesabıyla oluşturup oradan deploy edin (Run as: `zenithzirve@gmail.com`).
+
+> Alias ayarlanmazsa e-posta, çalıştıran hesabın adresinden gider ama **gönderen adı "Zenith Zirve'26"** ve **yanıt adresi `zenithzirve@gmail.com`** olur.
+
 ## Güvenlik notları
 
 - Şifre koruması küçük ekipler için yeterlidir; istemci tarafı olduğundan banka düzeyinde güvenlik sağlamaz. **Güçlü ve özel bir `ADMIN_PASSWORD` seçin.**

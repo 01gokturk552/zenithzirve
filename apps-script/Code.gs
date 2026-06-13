@@ -216,20 +216,59 @@ function findName(headers, rowVals) {
   return "";
 }
 
+var SENDER_EMAIL = "zenithzirve@gmail.com";  // gönderen olarak kullanılacak (doğrulanmış alias ise)
+var SENDER_NAME = "Zenith Zirve'26";
+
 function sendApprovalEmail(to, name) {
-  var greeting = name ? ("Sayın " + name + ",") : "Merhaba,";
+  var greeting = name ? ("Sayın " + name + ",") : "Sayın Katılımcımız,";
   var subject = "Zenith Zirve'26 — Başvurunuz Onaylandı";
+
   var body =
     greeting + "\n\n" +
-    "Zenith Zirve'26 başvurunuz onaylanmıştır. Sizi aramızda görmekten mutluluk duyacağız!\n\n" +
-    "Etkinlik Bilgileri:\n" +
-    "• Tarih: 27-28 Haziran 2026\n" +
-    "• Yer: Eyüpsultan Kültür ve Sanat Merkezi, İstanbul\n\n" +
-    "Katılım ve ödeme detaylarıyla ilgili bilgilendirme en kısa sürede tarafınıza iletilecektir.\n\n" +
-    "Sorularınız için bu e-postayı yanıtlayabilirsiniz.\n\n" +
-    "Saygılarımızla,\n" +
-    "Zenith Zirve'26 Organizasyon Ekibi";
-  MailApp.sendEmail(to, subject, body);
+    "İlginiz ve değerli başvurunuz için içtenlikle teşekkür ederiz, başvurunuzun kabul aldığını büyük bir memnuniyet ve heyecanla bildirmek isteriz.\n\n" +
+    "Başvuru sürecinizi tamamlayabilmeniz için, aşağıda bilgileri yer alan hesaba 650 TL tutarındaki başvuru ücretini yatırmanız gerekmektedir. Ödemenizi gerçekleştirdikten sonra dekontunuzu, \"Zenith Zirve Dekontu – Adınız Soyadınız\" açıklamasıyla birlikte mail adresimiz üzerinden iletmenizi rica ederiz.\n\n" +
+    "Hesap Adı: Nurçin Civan\n" +
+    "IBAN: TR440006701000000037584963\n\n" +
+    "Son Ödeme Tarihi: 24 Haziran\n\n" +
+    "Sizleri aramızda görmek için sabırsızlanıyor, birlikte verimli ve keyifli bir etkinlik deneyimi yaşayacağımıza inanıyoruz.\n\n" +
+    "Herhangi bir sorunuz olması durumunda bizimle iletişime geçmekten lütfen çekinmeyiniz.\n\n" +
+    "Saygılarımızla,\n\n" +
+    "İnsan Kaynakları Başkanı\n" +
+    "Eylül Şahin / +90 552 847 49 78\n" +
+    "Ömür Tanem Aydın / +90 533 669 00 86";
+
+  var htmlBody =
+    "<div style=\"font-family:Arial,Helvetica,sans-serif;font-size:15px;color:#1e293b;line-height:1.7;max-width:560px\">" +
+      "<p>" + greeting + "</p>" +
+      "<p>İlginiz ve değerli başvurunuz için içtenlikle teşekkür ederiz, başvurunuzun <strong>kabul aldığını</strong> büyük bir memnuniyet ve heyecanla bildirmek isteriz.</p>" +
+      "<p>Başvuru sürecinizi tamamlayabilmeniz için, aşağıda bilgileri yer alan hesaba <strong>650 TL</strong> tutarındaki başvuru ücretini yatırmanız gerekmektedir. Ödemenizi gerçekleştirdikten sonra dekontunuzu, &ldquo;Zenith Zirve Dekontu &ndash; Adınız Soyadınız&rdquo; açıklamasıyla birlikte mail adresimiz üzerinden iletmenizi rica ederiz.</p>" +
+      "<table style=\"border-collapse:collapse;background:#f1f5f9;border-radius:8px;margin:8px 0\"><tr><td style=\"padding:14px 18px\">" +
+        "<div><strong>Hesap Adı:</strong> Nurçin Civan</div>" +
+        "<div><strong>IBAN:</strong> TR440006701000000037584963</div>" +
+        "<div style=\"margin-top:8px\"><strong>Son Ödeme Tarihi:</strong> 24 Haziran</div>" +
+      "</td></tr></table>" +
+      "<p>Sizleri aramızda görmek için sabırsızlanıyor, birlikte verimli ve keyifli bir etkinlik deneyimi yaşayacağımıza inanıyoruz.</p>" +
+      "<p>Herhangi bir sorunuz olması durumunda bizimle iletişime geçmekten lütfen çekinmeyiniz.</p>" +
+      "<p>Saygılarımızla,</p>" +
+      "<p style=\"margin-top:4px\"><strong>İnsan Kaynakları Başkanı</strong><br>" +
+        "Eylül Şahin / +90 552 847 49 78<br>" +
+        "Ömür Tanem Aydın / +90 533 669 00 86</p>" +
+    "</div>";
+
+  var options = { htmlBody: htmlBody, name: SENDER_NAME };
+  // zenithzirve@gmail.com doğrulanmış bir alias ise o adresten gönder; değilse yanıt adresi yap
+  try {
+    var aliases = GmailApp.getAliases();
+    if (aliases && aliases.indexOf(SENDER_EMAIL) !== -1) {
+      options.from = SENDER_EMAIL;
+    } else {
+      options.replyTo = SENDER_EMAIL;
+    }
+  } catch (e) {
+    options.replyTo = SENDER_EMAIL;
+  }
+
+  MailApp.sendEmail(to, subject, body, options);
 }
 
 function findResponsesSheet() {
