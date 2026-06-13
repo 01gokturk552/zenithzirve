@@ -89,6 +89,20 @@ Panel sayfaları arama motorlarına kapalıdır (`noindex`); şifresiz erişilir
 
 Kodu (`Code.gs`) değiştirirseniz **Deploy → Manage deployments → (kalem) → Version: New version → Deploy** ile güncelleyin. URL aynı kalır.
 
+## Başvuru onaylama ve e-posta
+
+İK panelindeki her başvuru kartında **Onayla / Reddet** butonları ve bir **durum rozeti** (Beklemede / Onaylandı / Reddedildi) vardır.
+
+- **Onayla**'ya basınca: durum, form yanıt sayfasındaki **`Durum`** adlı sütuna yazılır **ve** başvuru sahibine otomatik **onay e-postası** gönderilir (e-posta, satırdaki mail sütunundan bulunur).
+- **Reddet** yalnızca durumu günceller, e-posta göndermez.
+- `Durum` sütunu yoksa ilk onay/red işleminde otomatik oluşturulur. Bu sütun panelde gösterilmez, yalnızca durumu saklar.
+
+> **Önemli — bu özelliği eklemek için kodu güncelleyin:** Bu klasördeki güncel `Code.gs`'i Apps Script'e yapıştırıp **yeni bir deployment versiyonu** yayınlayın (yukarıdaki adım). İlk onayda Google, **"e-posta gönderme"** izni isteyecektir → *Allow* deyin (MailApp yetkisi).
+>
+> ⚠️ **"Onayla" gerçek bir e-posta gönderir.** Önce kendi test başvurunuzla deneyin. Tüketici Gmail hesaplarında günlük ~100 e-posta sınırı vardır (16 başvuru için fazlasıyla yeterli).
+>
+> E-posta metnini değiştirmek için `Code.gs` içindeki `sendApprovalEmail` fonksiyonunu düzenleyin.
+
 ## Güvenlik notları
 
 - Şifre koruması küçük ekipler için yeterlidir; istemci tarafı olduğundan banka düzeyinde güvenlik sağlamaz. **Güçlü ve özel bir `ADMIN_PASSWORD` seçin.**

@@ -132,12 +132,18 @@
 
         getApplications: function () {
             if (!hasApi()) {
-                return Promise.resolve({ ok: true, local: true, headers: [], rows: [] });
+                return Promise.resolve({ ok: true, local: true, headers: [], rows: [], rowMeta: [] });
             }
             return apiGet({ action: "applications", token: Auth.token() }).then(function (res) {
                 if (res && res.ok) return res;
                 throw new Error((res && res.error) || "Başvurular alınamadı.");
             });
+        },
+
+        // Başvuru onay durumunu ayarlar (Onaylandı/Reddedildi/Beklemede). Backend gerektirir.
+        setStatus: function (row, status) {
+            if (!hasApi()) return Promise.reject(new Error("Bu işlem için backend bağlantısı gerekir."));
+            return apiPost({ action: "setStatus", token: Auth.token(), row: row, status: status }).then(checkSave);
         }
     };
 

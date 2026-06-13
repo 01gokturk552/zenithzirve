@@ -14,6 +14,7 @@
 
 var SPEAKER_COLS = ["name", "title", "photo", "bio"];
 var PROGRAM_COLS = ["day", "time", "title", "desc", "speakerNames", "speakerTitle", "photos"];
+var STATUS_HEADER = "Durum"; // başvuru yanıt sayfasına eklenen onay durumu sütunu
 
 // ---------- HTTP giriş noktaları ----------
 
@@ -58,6 +59,10 @@ function doPost(e) {
     if (action === "saveProgram") {
       if (role !== "admin") return json({ ok: false, error: "Bu işlem için admin yetkisi gerekir." });
       saveProgram(body.data || []); return json({ ok: true });
+    }
+    if (action === "setStatus") {
+      // admin veya ik onaylayabilir
+      return json(setApplicationStatus(Number(body.row), String(body.status || "")));
     }
 
     return json({ ok: false, error: "Bilinmeyen işlem: " + action });
@@ -132,22 +137,99 @@ function saveProgram(list) {
 
 function getApplications() {
   var sheet = findResponsesSheet();
-  if (!sheet) return { ok: true, headers: [], rows: [], note: "Form yanıt sayfası bulunamadı." };
+  if (!sheet) return { ok: true, headers: [], rows: [], rowMeta: [], note: "Form yanıt sayfası bulunamadı." };
 
   var values = sheet.getDataRange().getValues();
-  if (!values.length) return { ok: true, headers: [], rows: [] };
+  if (!values.length) return { ok: true, headers: [], rows: [], rowMeta: [] };
 
-  var headers = values[0].map(function (h) { return String(h); });
+  var allHeaders = values[0].map(function (h) { return String(h); });
+  var statusCol = allHeaders.indexOf(STATUS_HEADER); // -1 ise yok
   var tz = Session.getScriptTimeZone();
-  var rows = values.slice(1)
-    .filter(function (r) { return r.join("").trim() !== ""; })
-    .map(function (r) {
-      return r.map(function (c) {
-        if (c instanceof Date) return Utilities.formatDate(c, tz, "yyyy-MM-dd HH:mm");
-        return c == null ? "" : c;
-      });
-    });
-  return { ok: true, headers: headers, rows: rows };
+
+  // Durum sütununu tablodan gizle; durumu rowMeta'da ayrı döndür
+  var headers = allHeaders.filter(function (_, i) { return i !== statusCol; });
+  var rows = [], rowMeta = [];
+  for (var r = 1; r < values.length; r++) {
+    var rv = values[r];
+    if (rv.join("").trim() === "") continue;
+    var shown = [];
+    for (var c = 0; c < rv.length; c++) {
+      if (c === statusCol) continue;
+      var cell = rv[c];
+      shown.push(cell instanceof Date ? Utilities.formatDate(cell, tz, "yyyy-MM-dd HH:mm") : (cell == null ? "" : cell));
+    }
+    rows.push(shown);
+    rowMeta.push({ row: r + 1, status: statusCol >= 0 ? String(rv[statusCol] || "") : "" });
+  }
+  return { ok: true, headers: headers, rows: rows, rowMeta: rowMeta };
+}
+
+// Bir başvurunun onay durumunu ayarlar; "Onaylandı" ise e-posta gönderir.
+function setApplicationStatus(rowNum, status) {
+  if (!rowNum || rowNum < 2) throw new Error("Geçersiz satır.");
+  var sheet = findResponsesSheet();
+  if (!sheet) throw new Error("Form yanıt sayfası bulunamadı.");
+
+  var lastCol = sheet.getLastColumn();
+  var headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0].map(function (h) { return String(h); });
+  var statusCol = headers.indexOf(STATUS_HEADER);
+  if (statusCol < 0) {
+    statusCol = lastCol; // yeni sütun (0-bazlı index = mevcut sütun sayısı)
+    sheet.getRange(1, statusCol + 1).setValue(STATUS_HEADER);
+  }
+  sheet.getRange(rowNum, statusCol + 1).setValue(status);
+
+  var emailed = false, emailTo = "";
+  if (status === "Onaylandı") {
+    var rowVals = sheet.getRange(rowNum, 1, 1, sheet.getLastColumn()).getValues()[0];
+    emailTo = findEmail(headers, rowVals);
+    if (emailTo) {
+      sendApprovalEmail(emailTo, findName(headers, rowVals));
+      emailed = true;
+    }
+  }
+  return { ok: true, status: status, emailed: emailed, emailTo: emailTo };
+}
+
+function findEmail(headers, rowVals) {
+  var re = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+  for (var i = 0; i < headers.length; i++) {
+    if (/mail|e-?posta/i.test(headers[i])) {
+      var v = String(rowVals[i] || "").trim();
+      if (re.test(v)) return v;
+    }
+  }
+  for (var j = 0; j < rowVals.length; j++) {
+    var s = String(rowVals[j] || "").trim();
+    if (re.test(s)) return s;
+  }
+  return "";
+}
+
+function findName(headers, rowVals) {
+  for (var i = 0; i < headers.length; i++) {
+    if (/ad[ıi].{0,8}soyad|adınız|isim/i.test(headers[i])) {
+      var v = String(rowVals[i] || "").trim();
+      if (v) return v;
+    }
+  }
+  return "";
+}
+
+function sendApprovalEmail(to, name) {
+  var greeting = name ? ("Sayın " + name + ",") : "Merhaba,";
+  var subject = "Zenith Zirve'26 — Başvurunuz Onaylandı";
+  var body =
+    greeting + "\n\n" +
+    "Zenith Zirve'26 başvurunuz onaylanmıştır. Sizi aramızda görmekten mutluluk duyacağız!\n\n" +
+    "Etkinlik Bilgileri:\n" +
+    "• Tarih: 27-28 Haziran 2026\n" +
+    "• Yer: Eyüpsultan Kültür ve Sanat Merkezi, İstanbul\n\n" +
+    "Katılım ve ödeme detaylarıyla ilgili bilgilendirme en kısa sürede tarafınıza iletilecektir.\n\n" +
+    "Sorularınız için bu e-postayı yanıtlayabilirsiniz.\n\n" +
+    "Saygılarımızla,\n" +
+    "Zenith Zirve'26 Organizasyon Ekibi";
+  MailApp.sendEmail(to, subject, body);
 }
 
 function findResponsesSheet() {
@@ -219,8 +301,8 @@ function setup() {
   ensureSheet("Speakers", SPEAKER_COLS);
   ensureSheet("Program", PROGRAM_COLS);
   var props = PropertiesService.getScriptProperties();
-  if (!props.getProperty("ADMIN_PASSWORD")) props.setProperty("ADMIN_PASSWORD", "zenithadmin2026");
-  if (!props.getProperty("IK_PASSWORD")) props.setProperty("IK_PASSWORD", "zenithik2026");
+  if (!props.getProperty("ADMIN_PASSWORD")) props.setProperty("ADMIN_PASSWORD", "Vdmin_Z3nith2728");
+  if (!props.getProperty("IK_PASSWORD")) props.setProperty("IK_PASSWORD", "IK_Z3nith2728");
   Logger.log("Kurulum tamam. Şifreler: ADMIN_PASSWORD ve IK_PASSWORD ayarlandı (lütfen güçlü değerlerle değiştirin).");
 }
 

@@ -41,6 +41,12 @@
                 <div class="toolbar">
                     <input type="search" id="search" class="grow" placeholder="Başvurularda ara (isim, e-posta, okul…)">
                     <select id="typeFilter" hidden></select>
+                    <select id="statusFilter">
+                        <option value="">Tüm durumlar</option>
+                        <option value="Beklemede">Beklemede</option>
+                        <option value="Onaylandı">Onaylandı</option>
+                        <option value="Reddedildi">Reddedildi</option>
+                    </select>
                     <button id="viewToggle" class="pbtn pbtn-ghost">Tablo görünümü</button>
                     <button id="refreshBtn" class="pbtn pbtn-ghost">Yenile</button>
                     <button id="csvBtn" class="pbtn pbtn-ghost">CSV indir</button>

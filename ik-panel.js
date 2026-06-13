@@ -13,6 +13,7 @@
 
     var headers = [];
     var rows = [];
+    var rowMeta = [];       // rows ile paralel: { row: <sayfa satır no>, status: <durum> }
     var typeColIndex = -1;
     var viewMode = "cards"; // "cards" | "table"
 
@@ -24,6 +25,7 @@
     $("#search").addEventListener("input", render);
     $("#typeFilter").addEventListener("change", render);
     $("#csvBtn").addEventListener("click", downloadCsv);
+    $("#statusFilter").addEventListener("change", render);
     $("#viewToggle").addEventListener("click", function () {
         viewMode = viewMode === "cards" ? "table" : "cards";
         this.textContent = viewMode === "cards" ? "Tablo görünümü" : "Kart görünümü";
@@ -45,6 +47,7 @@
         Z.Data.getApplications().then(function (res) {
             headers = res.headers || [];
             rows = res.rows || [];
+            rowMeta = res.rowMeta || [];
             typeColIndex = -1;
             var typeCol = (CFG.applicationTypeColumn || "").toLowerCase().trim();
             if (typeCol) {
@@ -81,17 +84,25 @@
         sel.hidden = opts.length === 0;
     }
 
+    function statusOf(meta) {
+        var s = meta && meta.status ? String(meta.status).trim() : "";
+        return s || "Beklemede";
+    }
+
+    // Filtrelenmiş başvurular: [{ r: <satır dizisi>, meta: {row,status} }]
     function currentFiltered() {
         var q = $("#search").value.toLowerCase().trim();
         var type = $("#typeFilter").value;
-        return rows.filter(function (r) {
-            if (type && typeColIndex >= 0 && (r[typeColIndex] || "").trim() !== type) return false;
-            if (q) {
-                var hay = r.join(" ").toLowerCase();
-                if (hay.indexOf(q) === -1) return false;
-            }
-            return true;
+        var st = $("#statusFilter").value;
+        var out = [];
+        rows.forEach(function (r, i) {
+            var meta = rowMeta[i] || { row: i + 2, status: "" };
+            if (type && typeColIndex >= 0 && (r[typeColIndex] || "").trim() !== type) return;
+            if (st && statusOf(meta) !== st) return;
+            if (q && r.join(" ").toLowerCase().indexOf(q) === -1) return;
+            out.push({ r: r, meta: meta });
         });
+        return out;
     }
 
     function render() {
@@ -129,7 +140,8 @@
         headers.forEach(function (h, i) { if (nameRe.test(String(h))) nameIdxs.push(i); });
 
         var grid = elem("div", { class: "app-cards" });
-        data.forEach(function (r) {
+        data.forEach(function (item) {
+            var r = item.r, meta = item.meta;
             // Bu satır için ad: ilk dolu isim sütunu
             var titleIdx = -1;
             for (var k = 0; k < nameIdxs.length; k++) {
@@ -152,10 +164,55 @@
 
             var card = elem("div", { class: "app-card" }, [elem("div", { class: "app-card-head" }, headChildren)]);
             if (tsIdx >= 0 && r[tsIdx]) card.appendChild(elem("div", { class: "app-meta", text: String(r[tsIdx]) }));
+            card.appendChild(actionRow(meta));
             card.appendChild(fields);
             grid.appendChild(card);
         });
         return grid;
+    }
+
+    // Durum rozeti + Onayla / Reddet butonları
+    function actionRow(meta) {
+        var cur = statusOf(meta);
+        var pill = elem("span", { class: "status-pill " + statusClass(cur), text: cur });
+        var approve = elem("button", { class: "pbtn pbtn-ok pbtn-sm", type: "button" }, ["✓ Onayla"]);
+        var reject = elem("button", { class: "pbtn pbtn-danger pbtn-sm", type: "button" }, ["✕ Reddet"]);
+
+        approve.addEventListener("click", function () { doSetStatus(meta, "Onaylandı", pill, [approve, reject]); });
+        reject.addEventListener("click", function () { doSetStatus(meta, "Reddedildi", pill, [approve, reject]); });
+
+        return elem("div", { class: "app-actions" }, [pill, elem("span", { class: "spacer" }), approve, reject]);
+    }
+
+    function statusClass(s) {
+        if (s === "Onaylandı") return "ok";
+        if (s === "Reddedildi") return "rejected";
+        return "pending";
+    }
+
+    function doSetStatus(meta, status, pill, btns) {
+        var msg = status === "Onaylandı"
+            ? "Bu başvuru ONAYLANACAK ve başvuru sahibine e-posta gönderilecek. Emin misiniz?"
+            : "Bu başvuru REDDEDİLECEK. Emin misiniz?";
+        if (!confirm(msg)) return;
+
+        btns.forEach(function (b) { b.disabled = true; });
+        Z.Data.setStatus(meta.row, status).then(function (res) {
+            btns.forEach(function (b) { b.disabled = false; });
+            meta.status = status;
+            pill.textContent = status;
+            pill.className = "status-pill " + statusClass(status);
+            var note = "Durum: " + status;
+            if (status === "Onaylandı") {
+                note += res.emailed ? (" · E-posta gönderildi (" + res.emailTo + ")")
+                                    : " · ⚠ E-posta adresi bulunamadı, mail gönderilemedi";
+            }
+            Z.showStatus($("#globalStatus"), "ok", note);
+            setTimeout(function () { Z.hideStatus($("#globalStatus")); }, 6000);
+        }).catch(function (err) {
+            btns.forEach(function (b) { b.disabled = false; });
+            Z.showStatus($("#globalStatus"), "err", "İşlem başarısız: " + err.message);
+        });
     }
 
     // Tek alan satırı; uzun başlık/cevapları kısaltır, "Tümünü gör" ile açar
@@ -183,13 +240,15 @@
     }
 
     function buildTable(data) {
-        var thead = elem("thead", {}, [
-            elem("tr", {}, headers.map(function (h) { return elem("th", { text: h }); }))
-        ]);
-        var tbody = elem("tbody", {}, data.map(function (r) {
-            return elem("tr", {}, headers.map(function (_, ci) {
-                return elem("td", { text: r[ci] != null ? String(r[ci]) : "" });
-            }));
+        var thHeaders = headers.map(function (h) { return elem("th", { text: h }); });
+        thHeaders.unshift(elem("th", { text: "Durum" }));
+        var thead = elem("thead", {}, [elem("tr", {}, thHeaders)]);
+        var tbody = elem("tbody", {}, data.map(function (item) {
+            var tds = headers.map(function (_, ci) {
+                return elem("td", { text: item.r[ci] != null ? String(item.r[ci]) : "" });
+            });
+            tds.unshift(elem("td", {}, [elem("span", { class: "status-pill " + statusClass(statusOf(item.meta)), text: statusOf(item.meta) })]));
+            return elem("tr", {}, tds);
         }));
         return elem("div", { class: "table-wrap" }, [elem("table", { class: "data-table" }, [thead, tbody])]);
     }
@@ -197,7 +256,11 @@
     function downloadCsv() {
         if (!headers.length) return;
         var data = currentFiltered();
-        var lines = [headers].concat(data).map(function (row) {
+        var head = ["Durum"].concat(headers);
+        var matrix = [head].concat(data.map(function (item) {
+            return [statusOf(item.meta)].concat(item.r);
+        }));
+        var lines = matrix.map(function (row) {
             return row.map(function (cell) {
                 var s = cell == null ? "" : String(cell);
                 if (/[",\n;]/.test(s)) s = '"' + s.replace(/"/g, '""') + '"';
