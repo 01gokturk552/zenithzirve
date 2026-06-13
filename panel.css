@@ -277,6 +277,90 @@ table.data-table thead th {
 table.data-table tbody tr:nth-child(even) { background: var(--muted); }
 table.data-table tbody tr:hover { background: rgba(59, 130, 246, 0.08); }
 
+/* Başvuru kartları (okunması kolay görünüm) */
+.app-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.25rem;
+    align-items: start;
+}
+
+.app-card {
+    background: var(--gradient-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 14px;
+    box-shadow: var(--shadow-card);
+    padding: 1.25rem 1.35rem;
+}
+
+.app-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    margin-bottom: 0.4rem;
+}
+
+.app-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.3rem;
+    color: var(--primary);
+    line-height: 1.2;
+}
+
+.app-type {
+    background: var(--primary);
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    white-space: nowrap;
+    flex: 0 0 auto;
+}
+
+.app-meta {
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+    margin-bottom: 0.9rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.app-fields { display: grid; gap: 0.7rem; }
+
+.app-field { display: grid; gap: 0.15rem; }
+
+.app-field .lbl {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--muted-foreground);
+    text-transform: uppercase;
+}
+
+.app-field .val {
+    color: var(--foreground);
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.5;
+}
+
+.val-more {
+    align-self: start;
+    margin-top: 0.15rem;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--secondary);
+    cursor: pointer;
+}
+
+.val-more:hover { text-decoration: underline; }
+
 /* Araç çubuğu / filtre */
 .toolbar {
     display: flex;

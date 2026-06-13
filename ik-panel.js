@@ -14,6 +14,7 @@
     var headers = [];
     var rows = [];
     var typeColIndex = -1;
+    var viewMode = "cards"; // "cards" | "table"
 
     $("#logoutBtn").addEventListener("click", function () {
         Z.Auth.logout();
@@ -23,6 +24,11 @@
     $("#search").addEventListener("input", render);
     $("#typeFilter").addEventListener("change", render);
     $("#csvBtn").addEventListener("click", downloadCsv);
+    $("#viewToggle").addEventListener("click", function () {
+        viewMode = viewMode === "cards" ? "table" : "cards";
+        this.textContent = viewMode === "cards" ? "Tablo görünümü" : "Kart görünümü";
+        render();
+    });
 
     function init() {
         if (!Z.hasApi()) {
@@ -100,6 +106,83 @@
         var data = currentFiltered();
         $("#count").textContent = data.length + " / " + rows.length + " başvuru";
 
+        host.innerHTML = "";
+        host.appendChild(viewMode === "table" ? buildTable(data) : buildCards(data));
+
+        if (!data.length) {
+            host.appendChild(elem("div", { class: "empty-state", html: "<span class='ico'>🔍</span>Filtreye uyan başvuru yok." }));
+        }
+    }
+
+    function detectIdx(re) {
+        for (var i = 0; i < headers.length; i++) { if (re.test(String(headers[i]))) return i; }
+        return -1;
+    }
+
+    // Okunması kolay kart görünümü: her başvuru = bir kart, alanlar "Soru → Cevap"
+    function buildCards(data) {
+        var tsRe = /(zaman ?damgas|timestamp|tarih)/i;
+        var nameRe = /(ad[ıi].{0,8}soyad|isim|adınız|^ad$|full ?name|\bname\b)/i;
+        var tsIdx = detectIdx(tsRe);
+        // İsim olabilecek tüm sütunlar (delegasyon + bireysel için ayrı olabilir)
+        var nameIdxs = [];
+        headers.forEach(function (h, i) { if (nameRe.test(String(h))) nameIdxs.push(i); });
+
+        var grid = elem("div", { class: "app-cards" });
+        data.forEach(function (r) {
+            // Bu satır için ad: ilk dolu isim sütunu
+            var titleIdx = -1;
+            for (var k = 0; k < nameIdxs.length; k++) {
+                if (r[nameIdxs[k]] != null && String(r[nameIdxs[k]]).trim()) { titleIdx = nameIdxs[k]; break; }
+            }
+            var titleVal = titleIdx >= 0 ? String(r[titleIdx]) : "İsimsiz başvuru";
+
+            var headChildren = [elem("h4", { class: "app-name", text: titleVal })];
+            if (typeColIndex >= 0 && r[typeColIndex]) {
+                headChildren.push(elem("span", { class: "app-type", text: String(r[typeColIndex]) }));
+            }
+
+            var fields = elem("div", { class: "app-fields" });
+            headers.forEach(function (h, ci) {
+                if (ci === titleIdx || ci === tsIdx || ci === typeColIndex) return;
+                var v = r[ci];
+                if (v == null || String(v).trim() === "") return;
+                fields.appendChild(fieldRow(String(h), String(v)));
+            });
+
+            var card = elem("div", { class: "app-card" }, [elem("div", { class: "app-card-head" }, headChildren)]);
+            if (tsIdx >= 0 && r[tsIdx]) card.appendChild(elem("div", { class: "app-meta", text: String(r[tsIdx]) }));
+            card.appendChild(fields);
+            grid.appendChild(card);
+        });
+        return grid;
+    }
+
+    // Tek alan satırı; uzun başlık/cevapları kısaltır, "Tümünü gör" ile açar
+    function fieldRow(label, value) {
+        var shortLabel = label.length > 70 ? label.slice(0, 67) + "…" : label;
+        var lbl = elem("span", { class: "lbl", title: label, text: shortLabel });
+        var val = elem("span", { class: "val" });
+        var children = [lbl, val];
+
+        if (value.length > 220) {
+            var preview = value.slice(0, 220) + "…";
+            val.textContent = preview;
+            var expanded = false;
+            var more = elem("button", { type: "button", class: "val-more" }, ["Tümünü gör"]);
+            more.addEventListener("click", function () {
+                expanded = !expanded;
+                val.textContent = expanded ? value : preview;
+                more.textContent = expanded ? "Daha az göster" : "Tümünü gör";
+            });
+            children.push(more);
+        } else {
+            val.textContent = value;
+        }
+        return elem("div", { class: "app-field" }, children);
+    }
+
+    function buildTable(data) {
         var thead = elem("thead", {}, [
             elem("tr", {}, headers.map(function (h) { return elem("th", { text: h }); }))
         ]);
@@ -108,13 +191,7 @@
                 return elem("td", { text: r[ci] != null ? String(r[ci]) : "" });
             }));
         }));
-
-        host.innerHTML = "";
-        host.appendChild(elem("div", { class: "table-wrap" }, [elem("table", { class: "data-table" }, [thead, tbody])]));
-
-        if (!data.length) {
-            host.appendChild(elem("div", { class: "empty-state", html: "<span class='ico'>🔍</span>Filtreye uyan başvuru yok." }));
-        }
+        return elem("div", { class: "table-wrap" }, [elem("table", { class: "data-table" }, [thead, tbody])]);
     }
 
     function downloadCsv() {

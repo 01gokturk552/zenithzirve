@@ -14,5 +14,5 @@ window.ZENITH_CONFIG = {
 
     // IK panelinde başvuruları ayırmak için kullanılan sütun adı (varsa).
     // Google Formunuzda "Başvuru Türü" gibi bir alan varsa adını buraya yazın.
-    applicationTypeColumn: "Başvuru Türü"
+    applicationTypeColumn: "Başvuru türünüz?"
 };
