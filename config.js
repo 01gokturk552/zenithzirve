@@ -10,7 +10,7 @@
  */
 window.ZENITH_CONFIG = {
     // Örn: "https://script.google.com/macros/s/AKfyc..../exec"
-    apiUrl: "https://script.google.com/macros/s/AKfycbzqKAhMfTBHekOxZlKFKNtAAPWDPMzGQqrlrb5zCVYIzAKa_SX4Fzn6ksI_6dKwCwUQ/exec",
+    apiUrl: "https://script.google.com/macros/s/AKfycbzThHzFSQGN0TP8N7K6ybfubpSH2S-8Z1yAoqWROeZjADPMlyQFHqh04WbnoNpxMlsl/exec",
 
     // IK panelinde başvuruları ayırmak için kullanılan sütun adı (varsa).
     // Google Formunuzda "Başvuru Türü" gibi bir alan varsa adını buraya yazın.
